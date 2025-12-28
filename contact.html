@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Lapiros Kitchen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="logo-img"></div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2>Get in Touch</h2>
+
+            <!-- Quick Contact Buttons -->
+            <div class="quick-contact-buttons">
+                <a href="tel:4052273385" class="quick-btn">📞 Call Now</a>
+                <a href="sms:4052273385" class="quick-btn">💬 Text Us</a>
+                <a href="mailto:barikalil@yahoo.com" class="quick-btn">📧 Email</a>
+            </div>
+
+            <!-- Contact Info Cards -->
+            <div class="contact-info">
+                <div class="info-card">
+                    <h3>📞 Phone</h3>
+                    <p><strong>(405) 227-3385</strong></p>
+                    <p>Call or text to place your order</p>
+                </div>
+                <div class="info-card">
+                    <h3>📧 Email</h3>
+                    <p><strong>barikalil@yahoo.com</strong></p>
+                    <p>For inquiries and catering requests</p>
+                </div>
+                <div class="info-card">
+                    <h3>📍 Location</h3>
+                    <p><a href="https://maps.google.com/?q=12405+Coywood,Oklahoma+City,OK+73142" class="address-link" target="_blank"><strong>12405 Coywood</strong><br>Oklahoma City, OK 73142</a></p>
+                    <p style="font-size: 0.9rem; color: #888;">Tap to open in maps</p>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="payment-methods">
+                <h3>Payment & Pickup</h3>
+                <p>We accept the following payment options for your convenience:</p>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        💵 Cash App: <strong>$LapiroKitchen</strong>
+                    </div>
+                    <div class="payment-option">
+                        💳 Zelle: <strong>barikalil@yahoo.com</strong>
+                    </div>
+                    <div class="payment-option">
+                        💵 Cash: <strong>Accepted at pickup</strong>
+                    </div>
+                </div>
+                <div style="background: linear-gradient(135deg, #f5f1e8, #fdfbf7); padding: 20px; border-radius: 12px; margin-top: 25px; border: 2px solid #d4af37;">
+                    <p style="margin: 0; color: #2d5016; font-weight: 600; text-align: center;">
+                        📍 <strong>Pickup Location:</strong> <a href="https://maps.google.com/?q=12405+Coywood,Oklahoma+City,OK+73142" class="address-link" target="_blank" style="color: #2d5016; text-decoration: underline;">12405 Coywood, Oklahoma City, OK 73142</a>
+                    </p>
+                    <p style="margin: 10px 0 0; color: #2d5016; text-align: center;">
+                        Please send payment after placing your order by phone. We'll notify you when your order is ready for pickup!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Hours -->
+            <div class="info-card" style="max-width: 500px; margin: 0 auto 50px;">
+                <h3>⏰ Business Hours</h3>
+                <p><strong>Monday - Saturday:</strong> 11:00 AM - 8:00 PM</p>
+                <p><strong>Sunday:</strong> Closed</p>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h3 style="text-align: center; margin-bottom: 30px;">Send Us a Message</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Leave a Review -->
+            <div id="leave-review" class="contact-form" style="margin-top: 80px;">
+                <h3 style="text-align: center; margin-bottom: 30px;">⭐ Leave a Review</h3>
+                <p style="text-align: center; color: #666; margin-bottom: 30px;">Share your experience with Lapiros Kitchen!</p>
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label for="reviewName">Name</label>
+                        <input type="text" id="reviewName" name="reviewName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewEmail">Email (optional)</label>
+                        <input type="email" id="reviewEmail" name="reviewEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <select id="rating" name="rating" required>
+                            <option value="">Select rating</option>
+                            <option value="5">⭐⭐⭐⭐⭐ (5 stars)</option>
+                            <option value="4">⭐⭐⭐⭐ (4 stars)</option>
+                            <option value="3">⭐⭐⭐ (3 stars)</option>
+                            <option value="2">⭐⭐ (2 stars)</option>
+                            <option value="1">⭐ (1 star)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewMessage">Your Review</label>
+                        <textarea id="reviewMessage" name="reviewMessage" required placeholder="Tell us about your experience..."></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Order Instructions -->
+            <div style="background: #f9f9f9; padding: 40px; border-radius: 12px; margin-top: 50px;">
+                <h3 style="text-align: center; color: #4CAF50; margin-bottom: 30px;">How to Order</h3>
+                <ol style="max-width: 600px; margin: 0 auto; line-height: 2; color: #666;">
+                    <li>Browse our menu and choose your dishes</li>
+                    <li>Call or text us at <strong>(405) 227-3385</strong></li>
+                    <li>Send payment via Cash App or Zelle after placing your order</li>
+                    <li>Pick up your order at our location during business hours</li>
+                </ol>
+                
+                <div style="background: white; padding: 30px; border-radius: 8px; margin-top: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    <h4 style="color: #4CAF50; text-align: center; margin-bottom: 20px;">🚚 Nationwide Shipping Available!</h4>
+                    <p style="color: #666; text-align: center; line-height: 1.8;">
+                        Can't make it to Oklahoma City? No problem! We ship our authentic Cameroonian dishes anywhere in the United States. 
+                        All orders are carefully packaged with ice packs and shipped via overnight or 2-day express to ensure freshness.
+                    </p>
+                    <p style="color: #666; text-align: center; margin-top: 15px;">
+                        <strong>Call (405) 227-3385</strong> to discuss shipping options and get a quote for your location.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Lapiros Kitchen</h3>
+                    <p>Bringing authentic Cameroonian flavors to your table</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Phone: (405) 227-3385</p>
+                    <p>Email: barikalil@yahoo.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Hours</h3>
+                    <p>Mon - Sat: 11am - 8pm</p>
+                    <p>Sunday: Closed</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Lapiros Kitchen. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
