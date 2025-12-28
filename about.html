@@ -7,12 +7,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
+    <!-- Navigation -->
+    <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <span>Lapiros Kitchen</span>
-            </div>
-            <div class="hamburger">
+            <div class="logo"><img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="logo-img"></div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -20,10 +25,12 @@
         </div>
     </nav>
 
-    <section class="about-coming-soon">
-        <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen Logo" class="about-logo">
+    <section class="about-simple">
+        <div class="hero-logo">
+            <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen Logo">
+        </div>
         <h1>Coming Soon</h1>
-        <a href="index.html" class="home-btn">Back to Home</a>
+        <a href="index.html" class="btn btn-primary">Back to Home</a>
     </section>
 
     <script src="script.js"></script>
