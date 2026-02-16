@@ -3,41 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Lapiros Kitchen</title>
+    <title>Contact – Lapiros Kitchen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo"><img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="logo-img"></div>
+            <a href="index.html" class="nav-logo">
+                <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="logo-img">
+            </a>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="menu.html">Menu</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html" class="active">Contact</a></li>
             </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <a href="order.html" class="nav-cta">Order Now</a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <!-- Contact Section -->
+    <div class="page-hero">
+        <div class="container">
+            <p class="section-label" style="color: var(--gold);">Reach Us</p>
+            <h1 class="page-title">Get in Touch</h1>
+            <p class="page-sub">We'd love to hear from you — for orders, catering, or any questions.</p>
+        </div>
+    </div>
+
     <section class="contact-section">
         <div class="container">
-            <h2>Get in Touch</h2>
 
-            <!-- Quick Contact Buttons -->
             <div class="quick-contact-buttons">
                 <a href="tel:4052273385" class="quick-btn">📞 Call Now</a>
                 <a href="sms:4052273385" class="quick-btn">💬 Text Us</a>
                 <a href="mailto:barikalil@yahoo.com" class="quick-btn">📧 Email</a>
+                <a href="order.html" class="btn btn-gold">🛒 Order Online</a>
             </div>
 
-            <!-- Contact Info Cards -->
             <div class="contact-info">
                 <div class="info-card">
                     <h3>📞 Phone</h3>
@@ -51,148 +59,160 @@
                 </div>
                 <div class="info-card">
                     <h3>📍 Location</h3>
-                    <p><a href="https://maps.google.com/?q=12405+Coywood,Oklahoma+City,OK+73142" class="address-link" target="_blank"><strong>12405 Coywood</strong><br>Oklahoma City, OK 73142</a></p>
-                    <p style="font-size: 0.9rem; color: #888;">Tap to open in maps</p>
+                    <p>
+                        <a href="https://maps.google.com/?q=12405+Coywood,Oklahoma+City,OK+73142" class="address-link" target="_blank">
+                            <strong>12405 Coywood</strong><br>Oklahoma City, OK 73142
+                        </a>
+                    </p>
+                    <p style="font-size:0.82rem;color:#888;margin-top:4px;">Tap to open in maps</p>
                 </div>
             </div>
 
-            <!-- Payment Methods -->
             <div class="payment-methods">
-                <h3>Payment & Pickup</h3>
+                <h3>Payment &amp; Pickup</h3>
                 <p>We accept the following payment options for your convenience:</p>
                 <div class="payment-options">
-                    <div class="payment-option">
-                        💵 Cash App: <strong>$LapiroKitchen</strong>
-                    </div>
-                    <div class="payment-option">
-                        💳 Zelle: <strong>barikalil@yahoo.com</strong>
-                    </div>
-                    <div class="payment-option">
-                        💵 Cash: <strong>Accepted at pickup</strong>
-                    </div>
+                    <div class="payment-option">💚 Cash App: <strong>$LapiroKitchen</strong></div>
+                    <div class="payment-option">💜 Zelle: <strong>barikalil@yahoo.com</strong></div>
+                    <div class="payment-option">💵 Cash: <strong>Accepted at pickup</strong></div>
                 </div>
-                <div style="background: linear-gradient(135deg, #f5f1e8, #fdfbf7); padding: 20px; border-radius: 12px; margin-top: 25px; border: 2px solid #d4af37;">
-                    <p style="margin: 0; color: #2d5016; font-weight: 600; text-align: center;">
-                        📍 <strong>Pickup Location:</strong> <a href="https://maps.google.com/?q=12405+Coywood,Oklahoma+City,OK+73142" class="address-link" target="_blank" style="color: #2d5016; text-decoration: underline;">12405 Coywood, Oklahoma City, OK 73142</a>
+                <div style="background:rgba(74,124,44,0.07);border:1px solid rgba(74,124,44,0.2);padding:20px;border-radius:12px;margin-top:20px;">
+                    <p style="margin:0;color:var(--green-dark);font-weight:600;text-align:center;">
+                        📍 <strong>Pickup Location:</strong>
+                        <a href="https://maps.google.com/?q=12405+Coywood,Oklahoma+City,OK+73142" target="_blank" style="color:var(--green-mid);">
+                            12405 Coywood, Oklahoma City, OK 73142
+                        </a>
                     </p>
-                    <p style="margin: 10px 0 0; color: #2d5016; text-align: center;">
-                        Please send payment after placing your order by phone. We'll notify you when your order is ready for pickup!
+                    <p style="margin:10px 0 0;color:var(--text-muted);text-align:center;font-size:0.9rem;">
+                        Please send payment after placing your order by phone. We'll notify you when your order is ready!
                     </p>
                 </div>
             </div>
 
-            <!-- Hours -->
-            <div class="info-card" style="max-width: 500px; margin: 0 auto 50px;">
+            <div class="info-card" style="max-width:500px;margin:0 auto 50px;">
                 <h3>⏰ Business Hours</h3>
-                <p><strong>Monday - Saturday:</strong> 11:00 AM - 8:00 PM</p>
+                <p><strong>Monday – Saturday:</strong> 11:00 AM – 8:00 PM</p>
                 <p><strong>Sunday:</strong> Closed</p>
             </div>
 
-            <!-- Contact Form -->
             <div class="contact-form">
-                <h3 style="text-align: center; margin-bottom: 30px;">Send Us a Message</h3>
+                <h3 style="text-align:center;margin-bottom:8px;">Send Us a Message</h3>
+                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;margin-bottom:28px;">Questions, catering requests, or just saying hello!</p>
                 <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(405) 000-0000">
+                        </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom:16px;">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
                     </div>
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom:24px;">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
+                        <textarea id="message" name="message" required rows="4" placeholder="How can we help you?"></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-green">Send Message</button>
                     </div>
                 </form>
             </div>
 
-            <!-- Leave a Review -->
-            <div id="leave-review" class="contact-form" style="margin-top: 80px;">
-                <h3 style="text-align: center; margin-bottom: 30px;">⭐ Leave a Review</h3>
-                <p style="text-align: center; color: #666; margin-bottom: 30px;">Share your experience with Lapiros Kitchen!</p>
+            <div id="leave-review" class="contact-form" style="margin-top:20px;">
+                <h3 style="text-align:center;margin-bottom:8px;">⭐ Leave a Review</h3>
+                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;margin-bottom:28px;">Share your experience with Lapiros Kitchen!</p>
                 <form id="reviewForm">
-                    <div class="form-group">
-                        <label for="reviewName">Name</label>
-                        <input type="text" id="reviewName" name="reviewName" required>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+                        <div class="form-group">
+                            <label for="reviewName">Name</label>
+                            <input type="text" id="reviewName" name="reviewName" required placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="rating">Rating</label>
+                            <select id="rating" name="rating" required>
+                                <option value="">Select rating</option>
+                                <option value="5">⭐⭐⭐⭐⭐ (5 stars)</option>
+                                <option value="4">⭐⭐⭐⭐ (4 stars)</option>
+                                <option value="3">⭐⭐⭐ (3 stars)</option>
+                                <option value="2">⭐⭐ (2 stars)</option>
+                                <option value="1">⭐ (1 star)</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom:16px;">
                         <label for="reviewEmail">Email (optional)</label>
-                        <input type="email" id="reviewEmail" name="reviewEmail">
+                        <input type="email" id="reviewEmail" name="reviewEmail" placeholder="your@email.com">
                     </div>
-                    <div class="form-group">
-                        <label for="rating">Rating</label>
-                        <select id="rating" name="rating" required>
-                            <option value="">Select rating</option>
-                            <option value="5">⭐⭐⭐⭐⭐ (5 stars)</option>
-                            <option value="4">⭐⭐⭐⭐ (4 stars)</option>
-                            <option value="3">⭐⭐⭐ (3 stars)</option>
-                            <option value="2">⭐⭐ (2 stars)</option>
-                            <option value="1">⭐ (1 star)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom:24px;">
                         <label for="reviewMessage">Your Review</label>
-                        <textarea id="reviewMessage" name="reviewMessage" required placeholder="Tell us about your experience..."></textarea>
+                        <textarea id="reviewMessage" name="reviewMessage" required rows="4" placeholder="Tell us about your experience..."></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                        <button type="submit" class="btn btn-gold">Submit Review</button>
                     </div>
                 </form>
             </div>
 
-            <!-- Order Instructions -->
-            <div style="background: #f9f9f9; padding: 40px; border-radius: 12px; margin-top: 50px;">
-                <h3 style="text-align: center; color: #4CAF50; margin-bottom: 30px;">How to Order</h3>
-                <ol style="max-width: 600px; margin: 0 auto; line-height: 2; color: #666;">
-                    <li>Browse our menu and choose your dishes</li>
-                    <li>Call or text us at <strong>(405) 227-3385</strong></li>
-                    <li>Send payment via Cash App or Zelle after placing your order</li>
-                    <li>Pick up your order at our location during business hours</li>
-                </ol>
-                
-                <div style="background: white; padding: 30px; border-radius: 8px; margin-top: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">
-                    <h4 style="color: #4CAF50; text-align: center; margin-bottom: 20px;">🚚 Nationwide Shipping Available!</h4>
-                    <p style="color: #666; text-align: center; line-height: 1.8;">
-                        Can't make it to Oklahoma City? No problem! We ship our authentic Cameroonian dishes anywhere in the United States. 
-                        All orders are carefully packaged with ice packs and shipped via overnight or 2-day express to ensure freshness.
-                    </p>
-                    <p style="color: #666; text-align: center; margin-top: 15px;">
-                        <strong>Call (405) 227-3385</strong> to discuss shipping options and get a quote for your location.
-                    </p>
-                </div>
+            <div style="background:rgba(74,124,44,0.05);border:1px solid rgba(74,124,44,0.15);padding:40px;border-radius:var(--radius);margin-top:40px;">
+                <h3 style="text-align:center;font-family:'Playfair Display',serif;color:var(--green-dark);margin-bottom:24px;">🚚 Nationwide Shipping Available</h3>
+                <p style="text-align:center;color:var(--text-muted);max-width:600px;margin:0 auto 16px;line-height:1.8;">
+                    Can't make it to Oklahoma City? We ship our authentic Cameroonian dishes anywhere in the United States.
+                    All orders are carefully packaged with ice packs and shipped via overnight or 2-day express to ensure freshness.
+                </p>
+                <p style="text-align:center;color:var(--green-mid);font-weight:600;">
+                    Call <a href="tel:4052273385" style="color:var(--green-dark);">(405) 227-3385</a> to discuss shipping options and get a quote.
+                </p>
             </div>
+
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Lapiros Kitchen</h3>
-                    <p>Bringing authentic Cameroonian flavors to your table</p>
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="footer-logo">
+                    <p>Authentic Afro-Caribbean cuisine made with love in Oklahoma City.</p>
+                    <div class="social-links">
+                        <a href="tel:4052273385" class="social-link">📞</a>
+                        <a href="sms:4052273385" class="social-link">💬</a>
+                        <a href="mailto:barikalil@yahoo.com" class="social-link">📧</a>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <p>Phone: (405) 227-3385</p>
-                    <p>Email: barikalil@yahoo.com</p>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="order.html">Order Online</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Hours</h3>
-                    <p>Mon - Sat: 11am - 8pm</p>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p><a href="tel:4052273385">(405) 227-3385</a></p>
+                    <p><a href="mailto:barikalil@yahoo.com">barikalil@yahoo.com</a></p>
+                    <p>12405 Coywood<br>Oklahoma City, OK 73142</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Hours</h4>
+                    <p>Mon – Sat: 11am – 8pm</p>
                     <p>Sunday: Closed</p>
+                    <div class="payment-icons">
+                        <span class="pay-badge">Cash App</span>
+                        <span class="pay-badge">Zelle</span>
+                        <span class="pay-badge">Cash</span>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Lapiros Kitchen. All rights reserved.</p>
+                <p>© 2024 Lapiros Kitchen. All rights reserved.</p>
+                <p>Quality Food, Simply Delivered.</p>
             </div>
         </div>
     </footer>

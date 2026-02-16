@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Online – Lapiros Kitchen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="logo-img">
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <a href="order.html" class="nav-cta active-cta">Order Now</a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ORDER PAGE HERO -->
+    <div class="page-hero order-hero">
+        <div class="container">
+            <p class="section-label" style="color: var(--gold);">Pickup Order</p>
+            <h1 class="page-title">Order Online</h1>
+            <p class="page-sub">Select your dishes, choose a pickup time, and we'll have everything ready for you.</p>
+        </div>
+    </div>
+
+    <!-- NOTICE BANNER -->
+    <div class="order-notice">
+        <div class="container">
+            <p>📞 Prefer to call? Reach us at <a href="tel:4052273385"><strong>(405) 227-3385</strong></a> · Mon–Sat 11am–8pm · Pickup at 12405 Coywood, OKC, OK 73142</p>
+        </div>
+    </div>
+
+    <!-- ORDER LAYOUT -->
+    <section class="order-section">
+        <div class="order-container">
+
+            <!-- STEP 1: MENU SELECTION -->
+            <div class="order-main">
+                <div class="order-step-block">
+                    <div class="order-step-header">
+                        <span class="order-step-num">1</span>
+                        <h2>Choose Your Dishes</h2>
+                    </div>
+
+                    <div class="order-category">
+                        <h3 class="order-cat-title">🍲 Main Dishes</h3>
+                        <div class="order-items">
+                            <div class="order-item" data-name="Ndole" data-price="18">
+                                <div class="order-item-img">
+                                    <img src="images/Ndole.jpg" alt="Ndole">
+                                </div>
+                                <div class="order-item-info">
+                                    <h4>Ndole</h4>
+                                    <p>Traditional bitter leaf stew with groundnuts and your choice of meat or fish</p>
+                                    <span class="order-item-price">$18</span>
+                                </div>
+                                <div class="order-qty">
+                                    <button class="qty-btn minus" aria-label="Remove">−</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn plus" aria-label="Add">+</button>
+                                </div>
+                            </div>
+                            <div class="order-item" data-name="Eru" data-price="16">
+                                <div class="order-item-img">
+                                    <img src="images/Eru.jpg" alt="Eru">
+                                </div>
+                                <div class="order-item-info">
+                                    <h4>Eru</h4>
+                                    <p>Hearty vegetable soup with eru leaves, smoked fish and crayfish</p>
+                                    <span class="order-item-price">$16</span>
+                                </div>
+                                <div class="order-qty">
+                                    <button class="qty-btn minus" aria-label="Remove">−</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn plus" aria-label="Add">+</button>
+                                </div>
+                            </div>
+                            <div class="order-item" data-name="Koki" data-price="12">
+                                <div class="order-item-img">
+                                    <img src="images/Koki.jpg" alt="Koki">
+                                </div>
+                                <div class="order-item-info">
+                                    <h4>Koki</h4>
+                                    <p>Steamed bean pudding wrapped in banana leaves, a Cameroonian delicacy</p>
+                                    <span class="order-item-price">$12</span>
+                                </div>
+                                <div class="order-qty">
+                                    <button class="qty-btn minus" aria-label="Remove">−</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn plus" aria-label="Add">+</button>
+                                </div>
+                            </div>
+                            <div class="order-item" data-name="Achu Soup" data-price="20">
+                                <div class="order-item-img">
+                                    <img src="images/Achu.jpg" alt="Achu Soup">
+                                </div>
+                                <div class="order-item-info">
+                                    <h4>Achu Soup</h4>
+                                    <p>Yellow soup with palm oil and spices, served with pounded cocoyam</p>
+                                    <span class="order-item-price">$20</span>
+                                </div>
+                                <div class="order-qty">
+                                    <button class="qty-btn minus" aria-label="Remove">−</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn plus" aria-label="Add">+</button>
+                                </div>
+                            </div>
+                            <div class="order-item" data-name="Pepper Soup" data-price="15">
+                                <div class="order-item-img no-img">🍲</div>
+                                <div class="order-item-info">
+                                    <h4>Pepper Soup</h4>
+                                    <p>Spicy broth with meat or fish, infused with traditional African herbs</p>
+                                    <span class="order-item-price">$15</span>
+                                </div>
+                                <div class="order-qty">
+                                    <button class="qty-btn minus" aria-label="Remove">−</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn plus" aria-label="Add">+</button>
+                                </div>
+                            </div>
+                            <div class="order-item" data-name="Ekwang" data-price="18">
+                                <div class="order-item-img">
+                                    <img src="images/Ekwang.jpg" alt="Ekwang">
+                                </div>
+                                <div class="order-item-info">
+                                    <h4>Ekwang</h4>
+                                    <p>Grated cocoyam wrapped in leafy greens, cooked in spicy palm oil sauce</p>
+                                    <span class="order-item-price">$18</span>
+                                </div>
+                                <div class="order-qty">
+                                    <button class="qty-btn minus" aria-label="Remove">−</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn plus" aria-label="Add">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-category">
+                        <h3 class="order-cat-title">🍚 Rice &amp; Grains</h3>
+                        <div class="order-items">
+                            <div class="order-item" data-name="Jollof Rice" data-price="14">
+                                <div class="order-item-img no-img">🍛</div>
+                                <div class="order-item-info">
+                                    <h4>Jollof Rice</h4>
+                                    <p>One-pot rice cooked in rich tomato sauce with onions, peppers and spices</p>
+                                    <span class="order-item-price">$14</span>
+                                </div>
+                                <div class="order-qty">
+                                    <button class="qty-btn minus" aria-label="Remove">−</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn plus" aria-label="Add">+</button>
+                                </div>
+                            </div>
+                            <div class="order-item" data-name="Fried Rice" data-price="15">
+                                <div class="order-item-img">
+                                    <img src="images/Fried Rice.jpg" alt="Fried Rice">
+                                </div>
+                                <div class="order-item-info">
+                                    <h4>Fried Rice</h4>
+                                    <p>Colorful mix of rice, vegetables and your choice of protein</p>
+                                    <span class="order-item-price">$15</span>
+                                </div>
+                                <div class="order-qty">
+                                    <button class="qty-btn minus" aria-label="Remove">−</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn plus" aria-label="Add">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-category">
+                        <h3 class="order-cat-title">🍖 Grilled &amp; Fried</h3>
+                        <div class="order-items">
+                            <div class="order-item featured-item" data-name="Suya" data-price="16">
+                                <div class="order-item-img">
+                                    <img src="images/Suya.jpg" alt="Suya">
+                                </div>
+                                <div class="order-item-info">
+                                    <h4>Suya <span class="badge-small">Chef's Special</span></h4>
+                                    <p>Spicy grilled meat skewers in authentic groundnut spice mix</p>
+                                    <span class="order-item-price">$16</span>
+                                </div>
+                                <div class="order-qty">
+                                    <button class="qty-btn minus" aria-label="Remove">−</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn plus" aria-label="Add">+</button>
+                                </div>
+                            </div>
+                            <div class="order-item" data-name="Grilled Fish" data-price="22">
+                                <div class="order-item-img">
+                                    <img src="images/Roasted Fish.jpg" alt="Grilled Fish">
+                                </div>
+                                <div class="order-item-info">
+                                    <h4>Grilled Fish</h4>
+                                    <p>Whole fish grilled to perfection with lemon and traditional spices</p>
+                                    <span class="order-item-price">$22</span>
+                                </div>
+                                <div class="order-qty">
+                                    <button class="qty-btn minus" aria-label="Remove">−</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn plus" aria-label="Add">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-category">
+                        <h3 class="order-cat-title">🥘 Sides</h3>
+                        <div class="order-items">
+                            <div class="order-item" data-name="Fried Plantains" data-price="6">
+                                <div class="order-item-img no-img">🍌</div>
+                                <div class="order-item-info">
+                                    <h4>Fried Plantains</h4>
+                                    <p>Sweet ripe plantains fried to golden perfection</p>
+                                    <span class="order-item-price">$6</span>
+                                </div>
+                                <div class="order-qty">
+                                    <button class="qty-btn minus" aria-label="Remove">−</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn plus" aria-label="Add">+</button>
+                                </div>
+                            </div>
+                            <div class="order-item" data-name="Pepper Side" data-price="5">
+                                <div class="order-item-img">
+                                    <img src="images/Pepper.jpg" alt="Pepper">
+                                </div>
+                                <div class="order-item-info">
+                                    <h4>Pepper</h4>
+                                    <p>Spicy ground pepper blend — a perfect accompaniment to any dish</p>
+                                    <span class="order-item-price">$5</span>
+                                </div>
+                                <div class="order-qty">
+                                    <button class="qty-btn minus" aria-label="Remove">−</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn plus" aria-label="Add">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: CONTACT + PICKUP DATE/TIME -->
+                <div class="order-step-block">
+                    <div class="order-step-header">
+                        <span class="order-step-num">2</span>
+                        <h2>Your Details &amp; Pickup Time</h2>
+                    </div>
+                    <form id="orderForm" class="order-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="custName">Full Name *</label>
+                                <input type="text" id="custName" name="custName" placeholder="Your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="custPhone">Phone Number *</label>
+                                <input type="tel" id="custPhone" name="custPhone" placeholder="(405) 000-0000" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="custEmail">Email Address *</label>
+                                <input type="email" id="custEmail" name="custEmail" placeholder="your@email.com" required>
+                            </div>
+                        </div>
+
+                        <!-- DATE PICKER -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pickupDate">Pickup Date *</label>
+                                <input type="date" id="pickupDate" name="pickupDate" required>
+                                <small>We're open Mon–Sat. Sunday is closed.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="pickupTime">Pickup Time *</label>
+                                <select id="pickupTime" name="pickupTime" required>
+                                    <option value="">Select a time slot</option>
+                                    <option value="11:00 AM">11:00 AM</option>
+                                    <option value="11:30 AM">11:30 AM</option>
+                                    <option value="12:00 PM">12:00 PM (Noon)</option>
+                                    <option value="12:30 PM">12:30 PM</option>
+                                    <option value="1:00 PM">1:00 PM</option>
+                                    <option value="1:30 PM">1:30 PM</option>
+                                    <option value="2:00 PM">2:00 PM</option>
+                                    <option value="2:30 PM">2:30 PM</option>
+                                    <option value="3:00 PM">3:00 PM</option>
+                                    <option value="3:30 PM">3:30 PM</option>
+                                    <option value="4:00 PM">4:00 PM</option>
+                                    <option value="4:30 PM">4:30 PM</option>
+                                    <option value="5:00 PM">5:00 PM</option>
+                                    <option value="5:30 PM">5:30 PM</option>
+                                    <option value="6:00 PM">6:00 PM</option>
+                                    <option value="6:30 PM">6:30 PM</option>
+                                    <option value="7:00 PM">7:00 PM</option>
+                                    <option value="7:30 PM">7:30 PM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="specialNotes">Special Instructions <span style="font-weight:300;">(optional)</span></label>
+                            <textarea id="specialNotes" name="specialNotes" rows="3" placeholder="Allergies, spice preferences, special requests..."></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- STEP 3: PAYMENT METHOD -->
+                <div class="order-step-block">
+                    <div class="order-step-header">
+                        <span class="order-step-num">3</span>
+                        <h2>How Will You Pay?</h2>
+                    </div>
+                    <p class="step-sub">Payment is sent after we confirm your order by phone or text.</p>
+                    <div class="payment-methods-grid">
+                        <label class="payment-option-card">
+                            <input type="radio" name="payMethod" value="cashapp">
+                            <div class="poc-inner">
+                                <span class="poc-icon">💚</span>
+                                <strong>Cash App</strong>
+                                <span>$LapiroKitchen</span>
+                            </div>
+                        </label>
+                        <label class="payment-option-card">
+                            <input type="radio" name="payMethod" value="zelle">
+                            <div class="poc-inner">
+                                <span class="poc-icon">💜</span>
+                                <strong>Zelle</strong>
+                                <span>barikalil@yahoo.com</span>
+                            </div>
+                        </label>
+                        <label class="payment-option-card">
+                            <input type="radio" name="payMethod" value="cash">
+                            <div class="poc-inner">
+                                <span class="poc-icon">💵</span>
+                                <strong>Cash</strong>
+                                <span>At pickup</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="payment-info-note">
+                        <strong>📋 How it works:</strong> Place your order here, then we'll call or text you to confirm and provide payment details. Once payment is confirmed, we'll start preparing your food!
+                    </div>
+                </div>
+            </div>
+
+            <!-- ORDER SIDEBAR / CART -->
+            <aside class="order-sidebar" id="orderSidebar">
+                <div class="cart-header">
+                    <h3>Your Order</h3>
+                    <span class="cart-count" id="cartCount">0 items</span>
+                </div>
+
+                <div class="cart-empty" id="cartEmpty">
+                    <span>🛒</span>
+                    <p>Your cart is empty</p>
+                    <small>Add items from the menu to get started</small>
+                </div>
+
+                <div class="cart-items" id="cartItems"></div>
+
+                <div class="cart-totals" id="cartTotals" style="display:none;">
+                    <div class="cart-subtotal">
+                        <span>Subtotal</span>
+                        <span id="cartSubtotal">$0.00</span>
+                    </div>
+                    <div class="cart-note">
+                        <small>Tax &amp; any fees discussed at confirmation</small>
+                    </div>
+                    <div class="cart-total-final">
+                        <span>Estimated Total</span>
+                        <span id="cartTotal">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="cart-pickup-summary" id="pickupSummary" style="display:none;">
+                    <div class="pickup-detail">
+                        <strong>📅 Pickup</strong>
+                        <span id="summaryPickup">Not selected</span>
+                    </div>
+                    <div class="pickup-detail">
+                        <strong>📍 Location</strong>
+                        <span>12405 Coywood, OKC</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-gold btn-full" id="placeOrderBtn" disabled>
+                    Place Order Request
+                </button>
+                <p class="cart-disclaimer">By placing an order, you agree to be contacted by phone/text to confirm your order before payment.</p>
+            </aside>
+        </div>
+    </section>
+
+    <!-- ORDER SUCCESS MODAL -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-box">
+            <div class="modal-icon">✅</div>
+            <h2>Order Request Sent!</h2>
+            <p>Thank you, <strong id="modalName">there</strong>! We've received your order request and will contact you at <strong id="modalPhone"></strong> to confirm and arrange payment.</p>
+            <div class="modal-details" id="modalDetails"></div>
+            <p class="modal-sub">Your order will be ready at your selected pickup time once confirmed.</p>
+            <a href="index.html" class="btn btn-green">Back to Home</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="footer-logo">
+                    <p>Authentic Afro-Caribbean cuisine made with love in Oklahoma City.</p>
+                    <div class="social-links">
+                        <a href="tel:4052273385" class="social-link">📞</a>
+                        <a href="sms:4052273385" class="social-link">💬</a>
+                        <a href="mailto:barikalil@yahoo.com" class="social-link">📧</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="order.html">Order Online</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p><a href="tel:4052273385">(405) 227-3385</a></p>
+                    <p><a href="mailto:barikalil@yahoo.com">barikalil@yahoo.com</a></p>
+                    <p>12405 Coywood<br>Oklahoma City, OK 73142</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Hours</h4>
+                    <p>Mon – Sat: 11am – 8pm</p>
+                    <p>Sunday: Closed</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Lapiros Kitchen. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
