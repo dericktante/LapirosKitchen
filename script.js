@@ -90,19 +90,13 @@ if (reviewForm) {
 // ---- MENU SEARCH ----
 const menuSearch = document.getElementById('menuSearch');
 if (menuSearch) {
-    menuSearch.addEventListener('input', (e) => {
-        const term = e.target.value.toLowerCase().trim();
-        const items = document.querySelectorAll('.menu-item');
+    menuSearch.addEventListener("input", () => {
+        const searchTerm = menuSearch.value.toLowerCase();
+        const menuItems = document.querySelectorAll(".menu-item");
 
-        items.forEach(item => {
-            const name = item.querySelector('h4')?.textContent.toLowerCase() || '';
-            const desc = item.querySelector('p')?.textContent.toLowerCase() || '';
-            item.style.display = (name.includes(term) || desc.includes(term)) ? '' : 'none';
-        });
-
-        document.querySelectorAll('.menu-category').forEach(cat => {
-            const visible = [...cat.querySelectorAll('.menu-item')].some(i => i.style.display !== 'none');
-            cat.style.display = visible ? '' : 'none';
+        menuItems.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            item.style.display = text.includes(searchTerms) ? "flex" : "none";
         });
     });
 }
