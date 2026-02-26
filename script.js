@@ -58,20 +58,7 @@ if (navToggleBtn && navMenuList) {
 }
 
 // ---- SCROLL REVEAL ANIMATION — index.html, menu.html ----
-const revealElements = document.querySelectorAll('.reveal');
-
-if (revealElements.length) {
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    revealElements.forEach(el => revealObserver.observe(el));
-}
+// Scroll reveal animation removed as requested.
 
 // ---- SMOOTH SCROLL FOR ANCHOR LINKS — all pages ----
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
