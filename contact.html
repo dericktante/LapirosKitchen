@@ -10,19 +10,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navBar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
                 <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="logo-img">
             </a>
-            <ul class="nav-menu" id="navMenu">
+            <ul class="nav-menu" id="navMenuList">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="menu.html">Menu</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html" class="active">Contact</a></li>
             </ul>
             <a href="order.html" class="nav-cta">Order Now</a>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -39,33 +39,24 @@
     <section class="contact-section">
         <div class="container">
 
-            <div class="quick-contact-buttons">
-                <a href="tel:4052273385" class="quick-btn">📞 Call Now</a>
-                <a href="sms:4052273385" class="quick-btn">💬 Text Us</a>
-                <a href="mailto:barikalil@yahoo.com" class="quick-btn">📧 Email</a>
-                <a href="order.html" class="btn btn-gold">🛒 Order Online</a>
-            </div>
+            <!-- Order Online button removed -->
 
             <div class="contact-info">
-                <div class="info-card">
+                <a class="info-card info-card-link" href="tel:4052273385">
                     <h3>📞 Phone</h3>
                     <p><strong>(405) 227-3385</strong></p>
                     <p>Call or text to place your order</p>
-                </div>
-                <div class="info-card">
+                </a>
+                <a class="info-card info-card-link" href="mailto:barikalil@gmail.com">
                     <h3>📧 Email</h3>
-                    <p><strong>barikalil@yahoo.com</strong></p>
+                    <p><strong>barikalil@gmail.com</strong></p>
                     <p>For inquiries and catering requests</p>
-                </div>
-                <div class="info-card">
+                </a>
+                <a class="info-card info-card-link" href="https://maps.google.com/?q=12405+Coywood,Oklahoma+City,OK+73142" target="_blank">
                     <h3>📍 Location</h3>
-                    <p>
-                        <a href="https://maps.google.com/?q=12405+Coywood,Oklahoma+City,OK+73142" class="address-link" target="_blank">
-                            <strong>12405 Coywood</strong><br>Oklahoma City, OK 73142
-                        </a>
-                    </p>
+                    <p><strong>12405 Coywood</strong><br>Oklahoma City, OK 73142</p>
                     <p style="font-size:0.82rem;color:#888;margin-top:4px;">Tap to open in maps</p>
-                </div>
+                </a>
             </div>
 
             <div class="payment-methods">
@@ -73,7 +64,7 @@
                 <p>We accept the following payment options for your convenience:</p>
                 <div class="payment-options">
                     <div class="payment-option">💚 Cash App: <strong>$LapiroKitchen</strong></div>
-                    <div class="payment-option">💜 Zelle: <strong>barikalil@yahoo.com</strong></div>
+                    <div class="payment-option">💜 Zelle: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="85e7e4f7eceee4e9ece9c5fce4edeaeaabe6eae8">[email&#160;protected]</a></strong></div>
                     <div class="payment-option">💵 Cash: <strong>Accepted at pickup</strong></div>
                 </div>
                 <div style="background:rgba(74,124,44,0.07);border:1px solid rgba(74,124,44,0.2);padding:20px;border-radius:12px;margin-top:20px;">
@@ -93,15 +84,13 @@
                 <h3 style="text-align:center;margin-bottom:8px;">Send Us a Message</h3>
                 <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;margin-bottom:28px;">Questions, catering requests, or just saying hello!</p>
                 <form id="contactForm">
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required placeholder="Your name">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone" placeholder="(405) 000-0000">
-                        </div>
+                    <div class="form-group" style="margin-bottom:16px;">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Your name" style="width:100%;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:16px;">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(000) 000-0000">
                     </div>
                     <div class="form-group" style="margin-bottom:16px;">
                         <label for="email">Email</label>
@@ -128,7 +117,7 @@
                         </div>
                         <div class="form-group">
                             <label for="rating">Rating</label>
-                            <select id="rating" name="rating" required>
+                            <select id="rating" name="rating" required style="width:100%;max-width:300px;">
                                 <option value="">Select rating</option>
                                 <option value="5">⭐⭐⭐⭐⭐ (5 stars)</option>
                                 <option value="4">⭐⭐⭐⭐ (4 stars)</option>
@@ -175,7 +164,7 @@
                     <div class="social-links">
                         <a href="tel:4052273385" class="social-link">📞</a>
                         <a href="sms:4052273385" class="social-link">💬</a>
-                        <a href="mailto:barikalil@yahoo.com" class="social-link">📧</a>
+                        <a href="/cdn-cgi/l/email-protection#3b595a4952505a5752577b425a53545415585456" class="social-link">📧</a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -190,7 +179,7 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <p><a href="tel:4052273385">(405) 227-3385</a></p>
-                    <p><a href="mailto:barikalil@yahoo.com">barikalil@yahoo.com</a></p>
+                    <p><a href="/cdn-cgi/l/email-protection#b5d7d4c7dcded4d9dcd9f5ccd4dddada9bd6dad8"><span class="__cf_email__" data-cfemail="a9cbc8dbc0c2c8c5c0c5e9d0c8c1c6c687cac6c4">[email&#160;protected]</span></a></p>
                     <p>12405 Coywood<br>Oklahoma City, OK 73142</p>
                 </div>
                 <div class="footer-col">
@@ -203,12 +192,10 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 Lapiros Kitchen. All rights reserved.</p>
-                <p>Quality Food, Simply Delivered.</p>
+                <p>© 2024 Lapiros Kitchen. All rights reserved .</p>
             </div>
         </div>
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
