@@ -496,30 +496,16 @@ ul { list-style: none; }
 }
 
 .dish-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(30,58,15,0.65);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity var(--transition);
+    display: none;
 }
 
-.dish-card:hover .dish-overlay { opacity: 1; }
+/* .dish-card:hover .dish-overlay { opacity: 1; } -- overlay removed */
 
 .dish-order-btn {
-    background: var(--gold);
-    color: var(--green-dark);
-    padding: 10px 22px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.88rem;
-    transform: translateY(8px);
-    transition: all var(--transition);
+    display: none;
 }
 
-.dish-card:hover .dish-order-btn { transform: translateY(0); }
+/* .dish-card:hover .dish-order-btn { transform: translateY(0); } -- button removed */
 
 .dish-badge {
     position: absolute;
