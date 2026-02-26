@@ -1,40 +1,63 @@
 /* ============================================
    LAPIROS KITCHEN — Main Script
+   ============================================
+   
+   SHARED (loaded on all pages):
+     - Navbar Scroll Effect       → all pages
+     - Mobile Menu                → all pages
+     - Scroll Reveal Animation    → index.html, menu.html
+     - Smooth Scroll              → all pages
+     - Toast Notification         → contact.html, order.html
+
+   PAGE-SPECIFIC (only runs when element exists):
+     - Contact Form               → contact.html
+     - Review Form                → contact.html
+     - Menu Search                → menu.html
+     - Cart Logic                 → order.html
+     - Date Picker                → order.html
+     - Place Order / Modal        → order.html
+     - Payment Option Cards       → order.html
+
+   ============================================ */
+
+
+/* ============================================
+   SHARED — all pages
    ============================================ */
 
 // ---- NAVBAR SCROLL EFFECT ----
-const navbar = document.getElementById('navbar');
-if (navbar) {
+const navBar = document.getElementById('navBar');
+if (navBar) {
     window.addEventListener('scroll', () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 20);
+        navBar.classList.toggle('scrolled', window.scrollY > 20);
     });
 }
 
 // ---- MOBILE MENU ----
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
+const navToggleBtn = document.getElementById('navToggleBtn');
+const navMenuList = document.getElementById('navMenuList');
 
-if (hamburger && navMenu) {
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.setAttribute('aria-expanded', navMenu.classList.contains('active'));
+if (navToggleBtn && navMenuList) {
+    navToggleBtn.addEventListener('click', () => {
+        navMenuList.classList.toggle('active');
+        navToggleBtn.setAttribute('aria-expanded', navMenuList.classList.contains('active'));
     });
 
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
+            navMenuList.classList.remove('active');
         });
     });
 
     // Close on outside click
     document.addEventListener('click', (e) => {
-        if (!navbar.contains(e.target)) {
-            navMenu.classList.remove('active');
+        if (!navBar.contains(e.target)) {
+            navMenuList.classList.remove('active');
         }
     });
 }
 
-// ---- SCROLL REVEAL ANIMATION ----
+// ---- SCROLL REVEAL ANIMATION — index.html, menu.html ----
 const revealElements = document.querySelectorAll('.reveal');
 
 if (revealElements.length) {
@@ -50,7 +73,7 @@ if (revealElements.length) {
     revealElements.forEach(el => revealObserver.observe(el));
 }
 
-// ---- SMOOTH SCROLL FOR ANCHOR LINKS ----
+// ---- SMOOTH SCROLL FOR ANCHOR LINKS — all pages ----
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const target = document.querySelector(this.getAttribute('href'));
@@ -62,6 +85,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+
+/* ============================================
+   contact.html
+   ============================================ */
 
 // ---- CONTACT FORM ----
 const contactForm = document.getElementById('contactForm');
@@ -87,21 +115,31 @@ if (reviewForm) {
     });
 }
 
+
+/* ============================================
+   menu.html
+   ============================================ */
+
 // ---- MENU SEARCH ----
 const menuSearch = document.getElementById('menuSearch');
 if (menuSearch) {
     menuSearch.addEventListener("input", () => {
-        const searchTerm = menuSearch.value.toLowerCase();
+        const searchTerm = menuSearch.value.toLowerCase(); // NOTE: was 'searchTerms' (typo fixed)
         const menuItems = document.querySelectorAll(".menu-item");
 
         menuItems.forEach(item => {
             const text = item.textContent.toLowerCase();
-            item.style.display = text.includes(searchTerms) ? "flex" : "none";
+            item.style.display = text.includes(searchTerm) ? "flex" : "none";
         });
     });
 }
 
-// ---- ORDER PAGE: CART LOGIC ----
+
+/* ============================================
+   order.html
+   ============================================ */
+
+// ---- CART LOGIC ----
 const orderItems = document.querySelectorAll('.order-item[data-price]');
 const cartItemsEl  = document.getElementById('cartItems');
 const cartEmptyEl  = document.getElementById('cartEmpty');
@@ -112,7 +150,7 @@ const cartTotalEl    = document.getElementById('cartTotal');
 const placeOrderBtn  = document.getElementById('placeOrderBtn');
 const pickupSummaryEl = document.getElementById('pickupSummary');
 
-let cart = {}; // { "Dish Name": { price, qty } }
+let orderCart = {}; // { "Dish Name": { price, qty } }
 
 if (orderItems.length) {
     // Initialise qty buttons
@@ -124,19 +162,19 @@ if (orderItems.length) {
         const qtyVal   = item.querySelector('.qty-val');
 
         plusBtn.addEventListener('click', () => {
-            if (!cart[name]) cart[name] = { price, qty: 0 };
-            cart[name].qty++;
-            qtyVal.textContent = cart[name].qty;
+            if (!orderCart[name]) orderCart[name] = { price, qty: 0 };
+            orderCart[name].qty++;
+            qtyVal.textContent = orderCart[name].qty;
             item.classList.add('has-quantity');
             updateCart();
         });
 
         minusBtn.addEventListener('click', () => {
-            if (!cart[name] || cart[name].qty === 0) return;
-            cart[name].qty--;
-            qtyVal.textContent = cart[name].qty;
-            if (cart[name].qty === 0) {
-                delete cart[name];
+            if (!orderCart[name] || orderCart[name].qty === 0) return;
+            orderCart[name].qty--;
+            qtyVal.textContent = orderCart[name].qty;
+            if (orderCart[name].qty === 0) {
+                delete orderCart[name];
                 item.classList.remove('has-quantity');
             }
             updateCart();
@@ -160,23 +198,23 @@ if (orderItems.length) {
 function updateCart() {
     if (!cartItemsEl) return;
 
-    const keys = Object.keys(cart);
-    const totalItems = keys.reduce((acc, k) => acc + cart[k].qty, 0);
-    const subtotal   = keys.reduce((acc, k) => acc + cart[k].price * cart[k].qty, 0);
+    const cartKeys = Object.cartKeys(orderCart);
+    const totalItems = cartKeys.reduce((acc, k) => acc + orderCart[k].qty, 0);
+    const subtotal   = cartKeys.reduce((acc, k) => acc + orderCart[k].price * orderCart[k].qty, 0);
 
     // Update count badge
     if (cartCountEl) cartCountEl.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
 
     // Toggle empty state
-    if (cartEmptyEl)  cartEmptyEl.style.display  = keys.length === 0 ? '' : 'none';
-    if (cartTotalsEl) cartTotalsEl.style.display  = keys.length === 0 ? 'none' : '';
+    if (cartEmptyEl)  cartEmptyEl.style.display  = cartKeys.length === 0 ? '' : 'none';
+    if (cartTotalsEl) cartTotalsEl.style.display  = cartKeys.length === 0 ? 'none' : '';
 
     // Render lines
-    cartItemsEl.innerHTML = keys.map(name => `
+    cartItemsEl.innerHTML = cartKeys.map(name => `
         <div class="cart-line">
             <span class="cart-line-name">${name}</span>
-            <span class="cart-line-qty">×${cart[name].qty}</span>
-            <span class="cart-line-price">$${(cart[name].price * cart[name].qty).toFixed(2)}</span>
+            <span class="cart-line-qty">×${orderCart[name].qty}</span>
+            <span class="cart-line-price">$${(orderCart[name].price * orderCart[name].qty).toFixed(2)}</span>
         </div>
     `).join('');
 
@@ -226,8 +264,8 @@ function updatePickupSummary() {
     const date = pickupDateInput?.value;
     const time = pickupTimeInput?.value;
     if (date && time) {
-        const d = new Date(date + 'T00:00:00');
-        const formatted = d.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
+        const pickupDateObj = new Date(date + 'T00:00:00');
+        const formatted = pickupDateObj.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
         document.getElementById('summaryPickup').textContent = `${formatted} at ${time}`;
         pickupSummaryEl.style.display = '';
     }
@@ -235,7 +273,7 @@ function updatePickupSummary() {
 
 function checkOrderReady() {
     if (!placeOrderBtn) return;
-    const hasItems  = Object.keys(cart).length > 0;
+    const hasItems  = Object.cartKeys(orderCart).length > 0;
     const hasDate   = pickupDateInput?.value;
     const hasTime   = pickupTimeInput?.value;
     const hasName   = document.getElementById('custName')?.value.trim();
@@ -246,8 +284,8 @@ function checkOrderReady() {
 
 // Listen for form input changes too
 ['custName','custPhone','custEmail'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('input', checkOrderReady);
+    const inputEl = document.getElementById(id);
+    if (inputEl) inputEl.addEventListener('input', checkOrderReady);
 });
 
 // ---- PLACE ORDER ----
@@ -264,22 +302,22 @@ if (placeOrderBtn) {
         const notes  = document.getElementById('specialNotes').value.trim();
 
         // Format order summary for modal
-        const d = new Date(date + 'T00:00:00');
-        const dateFormatted = d.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
+        const orderDateObj = new Date(date + 'T00:00:00');
+        const dateFormatted = orderDateObj.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
 
-        const itemLines = Object.keys(cart).map(n =>
-            `${n} ×${cart[n].qty} — $${(cart[n].price * cart[n].qty).toFixed(2)}`
+        const itemLines = Object.cartKeys(orderCart).map(itemName =>
+            `${itemName} ×${orderCart[itemName].qty} — $${(orderCart[itemName].price * orderCart[itemName].qty).toFixed(2)}`
         ).join('\n');
 
-        const total = Object.values(cart).reduce((a,i) => a + i.price * i.qty, 0);
+        const total = Object.values(orderCart).reduce((acc, item) => acc + item.price * i.qty, 0);
 
         // Populate modal
         document.getElementById('modalName').textContent  = name;
         document.getElementById('modalPhone').textContent = phone;
         document.getElementById('modalDetails').innerHTML = `
             <strong>📋 Order Summary</strong><br>
-            ${Object.keys(cart).map(n =>
-                `${n} ×${cart[n].qty} — $${(cart[n].price * cart[n].qty).toFixed(2)}`
+            ${Object.cartKeys(orderCart).map(itemName =>
+                `${itemName} ×${orderCart[itemName].qty} — $${(orderCart[itemName].price * orderCart[itemName].qty).toFixed(2)}`
             ).join('<br>')}
             <br><strong>Estimated Total:</strong> $${total.toFixed(2)}<br>
             <strong>Pickup:</strong> ${dateFormatted} at ${time}<br>
@@ -291,11 +329,11 @@ if (placeOrderBtn) {
         document.getElementById('successModal').classList.add('active');
 
         // In production: send to backend / email service here
-        console.log('ORDER PLACED:', { name, phone, email, date, time, pay, cart, notes });
+        console.log('ORDER PLACED:', { name, phone, email, date, time, pay, orderCart, notes });
     });
 }
 
-// Close modal on overlay click
+// ---- CLOSE MODAL ON OVERLAY CLICK ----
 const successModal = document.getElementById('successModal');
 if (successModal) {
     successModal.addEventListener('click', (e) => {
@@ -309,6 +347,11 @@ if (successModal) {
 document.querySelectorAll('.payment-option-card input[type="radio"]').forEach(radio => {
     radio.addEventListener('change', checkOrderReady);
 });
+
+
+/* ============================================
+   SHARED — contact.html, order.html
+   ============================================ */
 
 // ---- TOAST NOTIFICATION ----
 function showToast(msg, type = 'success') {
@@ -344,13 +387,13 @@ function showToast(msg, type = 'success') {
 
     // inject keyframe if not yet present
     if (!document.getElementById('toast-style')) {
-        const s = document.createElement('style');
-        s.id = 'toast-style';
-        s.textContent = `
+        const toastStyleEl = document.createElement('style');
+        toastStyleEl.id = 'toast-style';
+        toastStyleEl.textContent = `
             @keyframes toastIn  { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform:translateY(0); } }
             @keyframes toastOut { from { opacity:1; } to { opacity:0; transform: translateY(16px); } }
         `;
-        document.head.appendChild(s);
+        document.head.appendChild(toastStyleEl);
     }
 
     document.body.appendChild(toast);

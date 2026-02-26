@@ -16,19 +16,19 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navBar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
                 <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="logo-img">
             </a>
-            <ul class="nav-menu" id="navMenu">
+            <ul class="nav-menu" id="navMenuList">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="menu.html">Menu</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <a href="order.html" class="nav-cta">Order Now</a>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -50,9 +50,6 @@
             <div class="hero-actions">
                 <a href="order.html" class="btn btn-gold">
                     <span>Place an Order</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
                 </a>
                 <a href="menu.html" class="btn btn-outline-light">Browse Menu</a>
             </div>
@@ -91,7 +88,7 @@
     <!-- ABOUT PREVIEW -->
     <section class="about-strip section-pad">
         <div class="container two-col">
-            <div class="col-text reveal">
+            <div class="col-text reveal visible">
                 <p class="section-label">Our Story</p>
                 <h2 class="section-heading">A Taste of Cameroon,<br><em>Right Here in OKC</em></h2>
                 <p class="body-text">At Lapiros Kitchen, every dish carries the warmth of a home kitchen and the bold
@@ -99,7 +96,7 @@
                     authentic flavors you simply can't find anywhere else in Oklahoma City.</p>
                 <a href="about.html" class="btn btn-green">Our Story</a>
             </div>
-            <div class="col-visual reveal delay-1">
+            <div class="col-visual reveal visible delay-1">
                 <div class="feature-card-stack">
                     <div class="feature-card fc-1">
                         <span class="fc-icon">🌿</span>
@@ -130,28 +127,12 @@
     <!-- FEATURED DISHES -->
     <section class="featured section-pad" id="featured">
         <div class="container">
-            <div class="section-header reveal">
+            <div class="section-header reveal visible">
                 <p class="section-label">Most Loved</p>
                 <h2 class="section-heading">Featured Dishes</h2>
             </div>
             <div class="dishes-grid">
-                <div class="dish-card reveal">
-                    <div class="dish-img-wrap">
-                        <img src="images/Ndole.jpg" alt="Ndole" loading="lazy">
-                        <div class="dish-overlay">
-                            <a href="order.html?dish=Ndole" class="dish-order-btn">Order This</a>
-                        </div>
-                    </div>
-                    <div class="dish-info">
-                        <div class="dish-top">
-                            <h3>Ndole</h3>
-                            <span class="dish-price">$18</span>
-                        </div>
-                        <p>Traditional bitter leaf stew with groundnuts and your choice of meat or fish</p>
-                        <span class="dish-tag">Main Dish</span>
-                    </div>
-                </div>
-                <div class="dish-card reveal delay-1">
+                <div class="dish-card reveal visible delay-1">
                     <div class="dish-img-wrap">
                         <img src="images/Suya.jpg" alt="Suya" loading="lazy">
                         <span class="dish-badge">Chef's Special</span>
@@ -168,7 +149,23 @@
                         <span class="dish-tag">Grilled</span>
                     </div>
                 </div>
-                <div class="dish-card reveal delay-2">
+                <div class="dish-card reveal visible">
+                    <div class="dish-img-wrap">
+                        <img src="images/Ndole.jpg" alt="Ndole" loading="lazy">
+                        <div class="dish-overlay">
+                            <a href="order.html?dish=Ndole" class="dish-order-btn">Order This</a>
+                        </div>
+                    </div>
+                    <div class="dish-info">
+                        <div class="dish-top">
+                            <h3>Ndole</h3>
+                            <span class="dish-price">$18</span>
+                        </div>
+                        <p>Traditional bitter leaf stew with groundnuts and your choice of meat or fish</p>
+                        <span class="dish-tag">Main Dish</span>
+                    </div>
+                </div>
+                <div class="dish-card reveal visible delay-2">
                     <div class="dish-img-wrap">
                         <img src="images/Eru.jpg" alt="Eru" loading="lazy">
                         <div class="dish-overlay">
@@ -184,7 +181,7 @@
                         <span class="dish-tag">Main Dish</span>
                     </div>
                 </div>
-                <div class="dish-card reveal delay-3">
+                <div class="dish-card reveal visible delay-3">
                     <div class="dish-img-wrap">
                         <img src="images/Fried Rice.jpg" alt="Jollof Rice" loading="lazy">
                         <div class="dish-overlay">
@@ -210,7 +207,7 @@
     <!-- SHIPPING BANNER -->
     <section class="shipping-banner">
         <div class="container">
-            <div class="banner-inner reveal">
+            <div class="banner-inner reveal visible">
                 <div class="banner-icon">🚚</div>
                 <div class="banner-text">
                     <h3>We Ship Nationwide</h3>
@@ -232,7 +229,7 @@
                     <div class="social-links">
                         <a href="tel:4052273385" class="social-link" title="Call Us">📞</a>
                         <a href="sms:4052273385" class="social-link" title="Text Us">💬</a>
-                        <a href="mailto:barikalil@yahoo.com" class="social-link" title="Email">📧</a>
+                        <a href="/cdn-cgi/l/email-protection#e48685968d8f85888d88a49d858c8b8bca878b89" class="social-link" title="Email">📧</a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -247,7 +244,7 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <p><a href="tel:4052273385">(405) 227-3385</a></p>
-                    <p><a href="mailto:barikalil@yahoo.com">barikalil@yahoo.com</a></p>
+                    <p><a href="/cdn-cgi/l/email-protection#aac8cbd8c3c1cbc6c3c6ead3cbc2c5c584c9c5c7"><span class="__cf_email__" data-cfemail="caa8abb8a3a1aba6a3a68ab3aba2a5a5e4a9a5a7">[email&#160;protected]</span></a></p>
                     <p>12405 Coywood<br>Oklahoma City, OK 73142</p>
                 </div>
                 <div class="footer-col">
@@ -260,13 +257,10 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 Lapiros Kitchen. All rights reserved.</p>
-                <p>Quality Food, Simply Delivered.</p>
+                <p>© 2024 Lapiros Kitchen. All rights reserved .</p>
             </div>
         </div>
     </footer>
-
     <script src="script.js"></script>
 </body>
-
 </html>
