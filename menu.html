@@ -11,19 +11,19 @@
 </head>
 <body>
 
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navBar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
                 <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="logo-img">
             </a>
-            <ul class="nav-menu" id="navMenu">
+            <ul class="nav-menu" id="navMenuList">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="menu.html" class="active">Menu</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <a href="order.html" class="nav-cta">Order Now</a>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <!-- Order Now button removed -->
+            <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -39,138 +39,80 @@
 
     <section class="menu-section">
         <div class="container">
-
             <div class="menu-search-wrapper">
                 <input type="text" id="menuSearch" class="menu-search" placeholder="Search for a dish...">
             </div>
-
-            <!-- Main Dishes -->
-            <div class="menu-category">
-                <h3>🍲 Main Dishes</h3>
-                <div class="menu-items">
+            <div class="menu-items">
+                    <!-- Add new dishes below in this format: -->
+                    <!-- <div class="menu-item">
+                           <div class="menu-item-image"><img src="images/IMAGE_NAME.jpg" alt="Dish Name"></div>
+                           <h4 class="item-name">Dish Name</h4>
+                           <div class="item-price">$PRICE</div>
+                       </div> -->
                     <div class="menu-item">
-                        <div class="menu-item-image"><img src="images/Ndole.jpg" alt="Ndole"></div>
-                        <div class="item-info">
-                            <h4>Ndole</h4>
-                            <p>Traditional bitter leaf stew with groundnuts, served with your choice of beef, fish, or prawns</p>
-                        </div>
-                        <div class="item-price">$18</div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-item-image"><img src="images/Eru.jpg" alt="Eru"></div>
-                        <div class="item-info">
-                            <h4>Eru</h4>
-                            <p>Hearty vegetable soup made with eru and waterleaf, cooked with smoked fish and crayfish</p>
-                        </div>
+                        <div class="menu-item-image"><img src="images/Suya.jpg" alt="Suya"></div>
+                        <h4 class="item-name">Suya <span class="special-badge">Chef's Special</span></h4>
                         <div class="item-price">$16</div>
                     </div>
                     <div class="menu-item">
+                        <div class="menu-item-image"><img src="images/Eru.jpg" alt="Eru"></div>
+                        <h4 class="item-name">Eru</h4>
+                        <div class="item-price">$16</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-image"><img src="images/Ndole.jpg" alt="Ndole"></div>
+                        <h4 class="item-name">Ndole</h4>
+                        <div class="item-price">$18</div>
+                    </div>
+                    <div class="menu-item">
                         <div class="menu-item-image"><img src="images/Koki.jpg" alt="Koki"></div>
-                        <div class="item-info">
-                            <h4>Koki</h4>
-                            <p>Steamed bean pudding wrapped in banana leaves, a Cameroonian delicacy</p>
-                        </div>
+                        <h4 class="item-name">Koki</h4>
                         <div class="item-price">$12</div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-item-image"><img src="images/Achu.jpg" alt="Achu Soup"></div>
-                        <div class="item-info">
-                            <h4>Achu Soup</h4>
-                            <p>Yellow soup with a blend of spices, palm oil, and limestone, served with pounded cocoyam</p>
-                        </div>
+                        <h4 class="item-name">Achu Soup</h4>
                         <div class="item-price">$20</div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-info">
-                            <h4>Pepper Soup</h4>
-                            <p>Spicy broth with meat or fish, infused with traditional African spices and herbs</p>
-                        </div>
+                        <h4 class="item-name">Pepper Soup</h4>
                         <div class="item-price">$15</div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-item-image"><img src="images/Ekwang.jpg" alt="Ekwang"></div>
-                        <div class="item-info">
-                            <h4>Ekwang</h4>
-                            <p>Grated cocoyam wrapped in leafy greens and cooked in a rich, spicy palm oil sauce</p>
-                        </div>
+                        <h4 class="item-name">Ekwang</h4>
                         <div class="item-price">$18</div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Rice & Grains -->
-            <div class="menu-category">
-                <h3>🍚 Rice &amp; Grains</h3>
-                <div class="menu-items">
                     <div class="menu-item">
-                        <div class="item-info">
-                            <h4>Jollof Rice</h4>
-                            <p>One-pot rice dish cooked in rich tomato sauce with onions, peppers, and spices</p>
-                        </div>
+                        <h4 class="item-name">Jollof Rice</h4>
                         <div class="item-price">$14</div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-item-image"><img src="images/Fried Rice.jpg" alt="Fried Rice"></div>
-                        <div class="item-info">
-                            <h4>Fried Rice</h4>
-                            <p>Colorful mix of rice, vegetables, and your choice of protein</p>
-                        </div>
+                        <h4 class="item-name">Fried Rice</h4>
                         <div class="item-price">$15</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Grilled & Fried -->
-            <div class="menu-category">
-                <h3>🍖 Grilled &amp; Fried</h3>
-                <div class="menu-items">
-                    <div class="menu-item">
-                        <div class="menu-item-image"><img src="images/Suya.jpg" alt="Suya"></div>
-                        <div class="item-info">
-                            <h4>Suya <span class="special-badge">Chef's Special</span></h4>
-                            <p>Spicy grilled meat skewers marinated in groundnut spice mix (peanut powder and spices)</p>
-                        </div>
-                        <div class="item-price">$16</div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-item-image"><img src="images/Roasted Fish.jpg" alt="Grilled Fish"></div>
-                        <div class="item-info">
-                            <h4>Grilled Fish</h4>
-                            <p>Whole fish grilled to perfection with lemon and traditional spices</p>
-                        </div>
+                        <h4 class="item-name">Grilled Fish</h4>
                         <div class="item-price">$22</div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Sides -->
-            <div class="menu-category">
-                <h3>🥘 Sides</h3>
-                <div class="menu-items">
                     <div class="menu-item">
-                        <div class="item-info">
-                            <h4>Fried Plantains</h4>
-                            <p>Sweet ripe plantains fried to golden perfection</p>
-                        </div>
+                        <h4 class="item-name">Fried Plantains</h4>
                         <div class="item-price">$6</div>
                     </div>
                     <div class="menu-item">
                         <div class="menu-item-image"><img src="images/Pepper.jpg" alt="Pepper"></div>
-                        <div class="item-info">
-                            <h4>Pepper</h4>
-                            <p>Spicy ground pepper blend — a perfect accompaniment to any dish</p>
-                        </div>
+                        <h4 class="item-name">Pepper</h4>
                         <div class="item-price">$5</div>
                     </div>
                 </div>
             </div>
-
-            <div class="text-center" style="margin-top:40px;">
-                <a href="order.html" class="btn btn-gold">
-                    <span>Order Now</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
+                    </div>
+                </div>
             </div>
+
+            <!-- Order Now section removed -->
         </div>
     </section>
 
@@ -183,7 +125,7 @@
                     <div class="social-links">
                         <a href="tel:4052273385" class="social-link">📞</a>
                         <a href="sms:4052273385" class="social-link">💬</a>
-                        <a href="mailto:barikalil@yahoo.com" class="social-link">📧</a>
+                        <a href="/cdn-cgi/l/email-protection#51333023383a303d383d112830393e3e7f323e3c" class="social-link">📧</a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -198,7 +140,7 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <p><a href="tel:4052273385">(405) 227-3385</a></p>
-                    <p><a href="mailto:barikalil@yahoo.com">barikalil@yahoo.com</a></p>
+                    <p><a href="/cdn-cgi/l/email-protection#0d6f6c7f64666c6164614d746c656262236e6260"><span class="__cf_email__" data-cfemail="7e1c1f0c17151f1217123e071f161111501d1113">[email&#160;protected]</span></a></p>
                     <p>12405 Coywood<br>Oklahoma City, OK 73142</p>
                 </div>
                 <div class="footer-col">
@@ -212,11 +154,9 @@
             </div>
             <div class="footer-bottom">
                 <p>© 2024 Lapiros Kitchen. All rights reserved.</p>
-                <p>Quality Food, Simply Delivered.</p>
             </div>
         </div>
     </footer>
-
     <script src="script.js"></script>
 </body>
-</html>
+</html>        
