@@ -1,3 +1,14 @@
+.menu-item .item-name {
+    text-align: center;
+    display: block;
+    margin: 0 auto 8px auto;
+}
+
+.menu-item .item-price {
+    text-align: center;
+    display: block;
+    margin: 2px auto 0 auto;
+}
 /* ===================================================
    LAPIROS KITCHEN — Premium Redesign
    Color palette from logo: deep forest green, gold, cream
@@ -1384,7 +1395,7 @@ ul { list-style: none; }
     align-items: center;
     margin-top: 18px;
 }
-
+ 
 .item-info h4 {
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem;
@@ -1416,6 +1427,9 @@ ul { list-style: none; }
     text-align: center;
     margin-top: 2px;
     letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .special-badge {
