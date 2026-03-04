@@ -146,13 +146,53 @@ if (reviewForm) {
    menu.html
    ============================================ */
 
+// ---- LOAD DISHES FROM DATABASE ----
+const menuItemsEl = document.getElementById('menuItems');
+
+if (menuItemsEl) {
+    fetch('https://lapiros-backend.onrender.com/dishes')
+        .then(res => res.json())
+        .then(data => {
+            const dishes = data.dishes || [];
+
+            if (dishes.length === 0) {
+                menuItemsEl.innerHTML = `<p style="text-align:center;color:var(--text-muted);">No dishes available right now.</p>`;
+                return;
+            }
+
+            menuItemsEl.innerHTML = dishes.map(dish => `
+                <div class="menu-item" data-name="${dish.name}" data-price="${dish.price}">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    ${dish.image_url ? `<div class="menu-item-image"><img src="${dish.image_url}" alt="${dish.name}" loading="lazy"></div>` : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
+                    <h4 class="item-name">${dish.name}</h4>
+                    <div class="item-price">$${dish.price}</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Reinitialise cart buttons and wishlist after dynamic render
+            initCart();
+            initWishlist();
+        })
+        .catch(err => {
+            console.error('Error loading dishes:', err);
+            menuItemsEl.innerHTML = `<p style="text-align:center;color:var(--text-muted);">Could not load dishes right now.</p>`;
+        });
+}
+
 // ---- MENU SEARCH ----
 const menuSearch = document.getElementById('menuSearch');
 if (menuSearch) {
     menuSearch.addEventListener("input", () => {
-        const searchTerm = menuSearch.value.toLowerCase(); // NOTE: was 'searchTerms' (typo fixed)
+        const searchTerm = menuSearch.value.toLowerCase();
         const menuItems = document.querySelectorAll(".menu-item");
-
         menuItems.forEach(item => {
             const text = item.textContent.toLowerCase();
             item.style.display = text.includes(searchTerm) ? "flex" : "none";
@@ -256,7 +296,8 @@ function closeCart() {
 }
 
 // ---- ADD TO CART ----
-document.querySelectorAll('.menu-item').forEach(item => {
+function initCart() {
+    document.querySelectorAll('.menu-item').forEach(item => {
     const name  = item.dataset.name;
     const price = parseFloat(item.dataset.price);
     const addBtn  = item.querySelector('.add-to-cart-btn');
@@ -301,7 +342,7 @@ document.querySelectorAll('.menu-item').forEach(item => {
             qtyVal.textContent = 1;
         });
     }
-});
+})};
 
 // ---- UPDATE CART UI ----
 function updateCart() {
@@ -345,6 +386,7 @@ function updateCart() {
 }
 
 // ---- WISHLIST ----
+function initWishlist() {
 let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
 
 document.querySelectorAll('.wishlist-btn').forEach(btn => {
@@ -368,7 +410,7 @@ document.querySelectorAll('.wishlist-btn').forEach(btn => {
         }
         localStorage.setItem('wishlist', JSON.stringify(wishlist));
     });
-});
+})};
 
 // ---- PLACE ORDER ----
 if (placeOrderBtn) {
