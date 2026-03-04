@@ -88,7 +88,7 @@ if (contactForm) {
         const message = document.getElementById('message').value.trim();
 
         try {
-            const response = await fetch('http://localhost:3000/contact', {
+            const response = await fetch('https://lapiros-backend.onrender.com/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, phone, email, message })
@@ -120,7 +120,7 @@ if (reviewForm) {
         const review = document.getElementById('reviewMessage').value.trim();
 
         try {
-            const response = await fetch('http://localhost:3000/review', {
+            const response = await fetch('https://lapiros-backend.onrender.com/review', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, rating, review })
@@ -403,7 +403,7 @@ if (placeOrderBtn) {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/order', {
+            const response = await fetch('https://lapiros-backend.onrender.com/order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(orderData)
@@ -425,4 +425,36 @@ if (placeOrderBtn) {
             showToast('Could not connect to server. Please try again.', 'warning');
         }
     });
+}
+
+/* ============================================
+   index.html — REVIEWS
+   ============================================ */
+
+const reviewsGrid = document.getElementById('reviewsGrid');
+
+if (reviewsGrid) {
+    fetch('https://lapiros-backend.onrender.com/reviews')
+        .then(res => res.json())
+        .then(data => {
+            const reviews = data.reviews || [];
+
+            if (reviews.length === 0) {
+                reviewsGrid.innerHTML = `<div class="reviews-empty">No reviews yet — be the first to leave one!</div>`;
+                return;
+            }
+
+            reviewsGrid.innerHTML = reviews.map(rev => `
+                <div class="review-card">
+                    <div class="review-stars">${'⭐'.repeat(rev.rating)}</div>
+                    <p class="review-text">"${rev.review}"</p>
+                    <div class="review-author">— ${rev.name}</div>
+                    <div class="review-date">${new Date(rev.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</div>
+                </div>
+            `).join('');
+        })
+        .catch(err => {
+            console.error('Error loading reviews:', err);
+            reviewsGrid.innerHTML = `<div class="reviews-empty">Could not load reviews right now.</div>`;
+        });
 }
