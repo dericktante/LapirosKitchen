@@ -48,10 +48,9 @@ if (navToggleBtn && navMenuList) {
             navMenuList.classList.remove('active');
         });
     });
-
-    // Close on outside click
+    // Only close menu on outside click if menu is open
     document.addEventListener('click', (e) => {
-        if (!navBar.contains(e.target)) {
+        if (navMenuList.classList.contains('active') && !navBar.contains(e.target)) {
             navMenuList.classList.remove('active');
         }
     });
@@ -81,24 +80,64 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ---- CONTACT FORM ----
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const name  = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        showToast(`Thank you, ${name}! We'll reply to ${email} shortly.`, 'success');
-        contactForm.reset();
+        const name    = document.getElementById('name').value.trim();
+        const phone   = document.getElementById('phone').value.trim();
+        const email   = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        try {
+            const response = await fetch('http://localhost:3000/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, phone, email, message })
+            });
+
+            const data = await response.json();
+
+            if (data.message === 'Message received!') {
+                showToast(`Thank you, ${name}! We'll get back to you shortly.`, 'success');
+                contactForm.reset();
+            } else {
+                showToast('Something went wrong. Please try again.', 'warning');
+            }
+        } catch (err) {
+            console.error('Contact form error:', err);
+            showToast('Could not connect to server. Please try again.', 'warning');
+        }
     });
 }
 
 // ---- REVIEW FORM ----
 const reviewForm = document.getElementById('reviewForm');
 if (reviewForm) {
-    reviewForm.addEventListener('submit', (e) => {
+    reviewForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const name   = document.getElementById('reviewName').value;
+        const name   = document.getElementById('reviewName').value.trim();
+        const email  = document.getElementById('reviewEmail').value.trim();
         const rating = document.getElementById('rating').value;
-        showToast(`Thank you, ${name}! Your ${rating}★ review has been submitted.`, 'success');
-        reviewForm.reset();
+        const review = document.getElementById('reviewMessage').value.trim();
+
+        try {
+            const response = await fetch('http://localhost:3000/review', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, rating, review })
+            });
+
+            const data = await response.json();
+
+            if (data.message === 'Review submitted!') {
+                showToast(`Thank you, ${name}! Your ${rating}★ review has been submitted.`, 'success');
+                reviewForm.reset();
+            } else {
+                showToast('Something went wrong. Please try again.', 'warning');
+            }
+        } catch (err) {
+            console.error('Review form error:', err);
+            showToast('Could not connect to server. Please try again.', 'warning');
+        }
     });
 }
 
@@ -120,221 +159,6 @@ if (menuSearch) {
         });
     });
 }
-
-
-/* ============================================
-   order.html
-   ============================================ */
-
-// ---- CART LOGIC ----
-const orderItems = document.querySelectorAll('.order-item[data-price]');
-const cartItemsEl  = document.getElementById('cartItems');
-const cartEmptyEl  = document.getElementById('cartEmpty');
-const cartTotalsEl = document.getElementById('cartTotals');
-const cartCountEl  = document.getElementById('cartCount');
-const cartSubtotalEl = document.getElementById('cartSubtotal');
-const cartTotalEl    = document.getElementById('cartTotal');
-const placeOrderBtn  = document.getElementById('placeOrderBtn');
-const pickupSummaryEl = document.getElementById('pickupSummary');
-
-let orderCart = {}; // { "Dish Name": { price, qty } }
-
-if (orderItems.length) {
-    // Initialise qty buttons
-    orderItems.forEach(item => {
-        const name  = item.dataset.name;
-        const price = parseFloat(item.dataset.price);
-        const minusBtn = item.querySelector('.qty-btn.minus');
-        const plusBtn  = item.querySelector('.qty-btn.plus');
-        const qtyVal   = item.querySelector('.qty-val');
-
-        plusBtn.addEventListener('click', () => {
-            if (!orderCart[name]) orderCart[name] = { price, qty: 0 };
-            orderCart[name].qty++;
-            qtyVal.textContent = orderCart[name].qty;
-            item.classList.add('has-quantity');
-            updateCart();
-        });
-
-        minusBtn.addEventListener('click', () => {
-            if (!orderCart[name] || orderCart[name].qty === 0) return;
-            orderCart[name].qty--;
-            qtyVal.textContent = orderCart[name].qty;
-            if (orderCart[name].qty === 0) {
-                delete orderCart[name];
-                item.classList.remove('has-quantity');
-            }
-            updateCart();
-        });
-    });
-
-    // Pre-select from URL param (e.g. order.html?dish=Ndole)
-    const urlParams = new URLSearchParams(window.location.search);
-    const preselect = urlParams.get('dish');
-    if (preselect) {
-        orderItems.forEach(item => {
-            if (item.dataset.name === preselect) {
-                const plusBtn = item.querySelector('.qty-btn.plus');
-                plusBtn.click();
-                item.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        });
-    }
-}
-
-function updateCart() {
-    if (!cartItemsEl) return;
-
-    const cartKeys = Object.cartKeys(orderCart);
-    const totalItems = cartKeys.reduce((acc, k) => acc + orderCart[k].qty, 0);
-    const subtotal   = cartKeys.reduce((acc, k) => acc + orderCart[k].price * orderCart[k].qty, 0);
-
-    // Update count badge
-    if (cartCountEl) cartCountEl.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
-
-    // Toggle empty state
-    if (cartEmptyEl)  cartEmptyEl.style.display  = cartKeys.length === 0 ? '' : 'none';
-    if (cartTotalsEl) cartTotalsEl.style.display  = cartKeys.length === 0 ? 'none' : '';
-
-    // Render lines
-    cartItemsEl.innerHTML = cartKeys.map(name => `
-        <div class="cart-line">
-            <span class="cart-line-name">${name}</span>
-            <span class="cart-line-qty">×${orderCart[name].qty}</span>
-            <span class="cart-line-price">$${(orderCart[name].price * orderCart[name].qty).toFixed(2)}</span>
-        </div>
-    `).join('');
-
-    // Totals
-    if (cartSubtotalEl) cartSubtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-    if (cartTotalEl)    cartTotalEl.textContent    = `$${subtotal.toFixed(2)}`;
-
-    // Enable/disable order button
-    checkOrderReady();
-}
-
-// ---- DATE PICKER: disable Sundays & past dates ----
-const pickupDateInput = document.getElementById('pickupDate');
-const pickupTimeInput = document.getElementById('pickupTime');
-
-if (pickupDateInput) {
-    const today = new Date();
-    const yyyy  = today.getFullYear();
-    const mm    = String(today.getMonth() + 1).padStart(2, '0');
-    const dd    = String(today.getDate()).padStart(2, '0');
-    pickupDateInput.min = `${yyyy}-${mm}-${dd}`;
-
-    pickupDateInput.addEventListener('change', () => {
-        const selected = new Date(pickupDateInput.value + 'T00:00:00');
-        const dayOfWeek = selected.getDay(); // 0=Sun
-
-        if (dayOfWeek === 0) {
-            showToast('We are closed on Sundays. Please select another day.', 'warning');
-            pickupDateInput.value = '';
-            return;
-        }
-
-        updatePickupSummary();
-        checkOrderReady();
-    });
-}
-
-if (pickupTimeInput) {
-    pickupTimeInput.addEventListener('change', () => {
-        updatePickupSummary();
-        checkOrderReady();
-    });
-}
-
-function updatePickupSummary() {
-    if (!pickupSummaryEl) return;
-    const date = pickupDateInput?.value;
-    const time = pickupTimeInput?.value;
-    if (date && time) {
-        const pickupDateObj = new Date(date + 'T00:00:00');
-        const formatted = pickupDateObj.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
-        document.getElementById('summaryPickup').textContent = `${formatted} at ${time}`;
-        pickupSummaryEl.style.display = '';
-    }
-}
-
-function checkOrderReady() {
-    if (!placeOrderBtn) return;
-    const hasItems  = Object.cartKeys(orderCart).length > 0;
-    const hasDate   = pickupDateInput?.value;
-    const hasTime   = pickupTimeInput?.value;
-    const hasName   = document.getElementById('custName')?.value.trim();
-    const hasPhone  = document.getElementById('custPhone')?.value.trim();
-    const hasEmail  = document.getElementById('custEmail')?.value.trim();
-    placeOrderBtn.disabled = !(hasItems && hasDate && hasTime && hasName && hasPhone && hasEmail);
-}
-
-// Listen for form input changes too
-['custName','custPhone','custEmail'].forEach(id => {
-    const inputEl = document.getElementById(id);
-    if (inputEl) inputEl.addEventListener('input', checkOrderReady);
-});
-
-// ---- PLACE ORDER ----
-if (placeOrderBtn) {
-    placeOrderBtn.addEventListener('click', () => {
-        if (placeOrderBtn.disabled) return;
-
-        const name   = document.getElementById('custName').value.trim();
-        const phone  = document.getElementById('custPhone').value.trim();
-        const email  = document.getElementById('custEmail').value.trim();
-        const date   = pickupDateInput.value;
-        const time   = pickupTimeInput.value;
-        const pay    = document.querySelector('input[name="payMethod"]:checked')?.value || 'Not specified';
-        const notes  = document.getElementById('specialNotes').value.trim();
-
-        // Format order summary for modal
-        const orderDateObj = new Date(date + 'T00:00:00');
-        const dateFormatted = orderDateObj.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
-
-        const itemLines = Object.cartKeys(orderCart).map(itemName =>
-            `${itemName} ×${orderCart[itemName].qty} — $${(orderCart[itemName].price * orderCart[itemName].qty).toFixed(2)}`
-        ).join('\n');
-
-        const total = Object.values(orderCart).reduce((acc, item) => acc + item.price * i.qty, 0);
-
-        // Populate modal
-        document.getElementById('modalName').textContent  = name;
-        document.getElementById('modalPhone').textContent = phone;
-        document.getElementById('modalDetails').innerHTML = `
-            <strong>📋 Order Summary</strong><br>
-            ${Object.cartKeys(orderCart).map(itemName =>
-                `${itemName} ×${orderCart[itemName].qty} — $${(orderCart[itemName].price * orderCart[itemName].qty).toFixed(2)}`
-            ).join('<br>')}
-            <br><strong>Estimated Total:</strong> $${total.toFixed(2)}<br>
-            <strong>Pickup:</strong> ${dateFormatted} at ${time}<br>
-            <strong>Payment:</strong> ${pay.charAt(0).toUpperCase() + pay.slice(1)}
-            ${notes ? `<br><strong>Notes:</strong> ${notes}` : ''}
-        `;
-
-        // Show modal
-        document.getElementById('successModal').classList.add('active');
-
-        // In production: send to backend / email service here
-        console.log('ORDER PLACED:', { name, phone, email, date, time, pay, orderCart, notes });
-    });
-}
-
-// ---- CLOSE MODAL ON OVERLAY CLICK ----
-const successModal = document.getElementById('successModal');
-if (successModal) {
-    successModal.addEventListener('click', (e) => {
-        if (e.target === successModal) {
-            successModal.classList.remove('active');
-        }
-    });
-}
-
-// ---- PAYMENT OPTION CARDS ----
-document.querySelectorAll('.payment-option-card input[type="radio"]').forEach(radio => {
-    radio.addEventListener('change', checkOrderReady);
-});
-
 
 /* ============================================
    SHARED — contact.html, order.html
@@ -389,4 +213,216 @@ function showToast(msg, type = 'success') {
         toast.style.animation = 'toastOut 0.35s ease forwards';
         setTimeout(() => toast.remove(), 350);
     }, 3800);
+}
+
+/* ============================================
+   menu.html — CART & WISHLIST
+   ============================================ */
+
+// ---- CART STATE ----
+let cart = {}; // { "Dish Name": { price, qty } }
+
+// ---- CART ELEMENTS ----
+const cartBtn     = document.getElementById('cartBtn');
+const cartSidebar = document.getElementById('cartSidebar');
+const cartOverlay = document.getElementById('cartOverlay');
+const cartClose   = document.getElementById('cartClose');
+const cartEmpty   = document.getElementById('cartEmpty');
+const cartFooter  = document.getElementById('cartFooter');
+const cartItemsEl = document.getElementById('cartItems');
+const cartCountEl = document.getElementById('cartCount');
+const cartSubtotalEl = document.getElementById('cartSubtotal');
+const placeOrderBtn  = document.getElementById('placeOrderBtn');
+
+// ---- OPEN/CLOSE CART ----
+if (cartBtn) {
+    cartBtn.addEventListener('click', () => {
+        cartSidebar.classList.add('active');
+        cartOverlay.classList.add('active');
+    });
+}
+
+if (cartClose) {
+    cartClose.addEventListener('click', closeCart);
+}
+
+if (cartOverlay) {
+    cartOverlay.addEventListener('click', closeCart);
+}
+
+function closeCart() {
+    cartSidebar.classList.remove('active');
+    cartOverlay.classList.remove('active');
+}
+
+// ---- ADD TO CART ----
+document.querySelectorAll('.menu-item').forEach(item => {
+    const name  = item.dataset.name;
+    const price = parseFloat(item.dataset.price);
+    const addBtn  = item.querySelector('.add-to-cart-btn');
+    const minusBtn = item.querySelector('.qty-btn.minus');
+    const plusBtn  = item.querySelector('.qty-btn.plus');
+    const qtyVal   = item.querySelector('.qty-val');
+
+    let qty = 1;
+
+    if (minusBtn) {
+        minusBtn.addEventListener('click', () => {
+            if (qty > 1) {
+                qty--;
+                qtyVal.textContent = qty;
+            }
+        });
+    }
+
+    if (plusBtn) {
+        plusBtn.addEventListener('click', () => {
+            qty++;
+            qtyVal.textContent = qty;
+        });
+    }
+
+    if (addBtn) {
+        addBtn.addEventListener('click', () => {
+            const isFirstItem = Object.keys(cart).length === 0;
+            if (cart[name]) {
+                cart[name].qty += qty;
+            } else {
+                cart[name] = { price, qty };
+            }
+            updateCart();
+            // Only open cart on first item added
+            if (isFirstItem) {
+                cartSidebar.classList.add('active');
+                cartOverlay.classList.add('active');
+            }
+            // Reset qty
+            qty = 1;
+            qtyVal.textContent = 1;
+        });
+    }
+});
+
+// ---- UPDATE CART UI ----
+function updateCart() {
+    if (!cartItemsEl) return;
+
+    const cartKeys   = Object.keys(cart);
+    const totalItems = cartKeys.reduce((acc, k) => acc + cart[k].qty, 0);
+    const subtotal   = cartKeys.reduce((acc, k) => acc + cart[k].price * cart[k].qty, 0);
+
+    // Update count badge
+    if (cartCountEl) cartCountEl.textContent = totalItems;
+
+    // Toggle empty/footer
+    if (cartEmpty)  cartEmpty.style.display  = cartKeys.length === 0 ? '' : 'none';
+    if (cartFooter) cartFooter.style.display = cartKeys.length === 0 ? 'none' : '';
+
+    // Render cart lines
+    const linesHTML = cartKeys.map(name => `
+        <div class="cart-line">
+            <span class="cart-line-name">${name}</span>
+            <span class="cart-line-qty">×${cart[name].qty}</span>
+            <span class="cart-line-price">$${(cart[name].price * cart[name].qty).toFixed(2)}</span>
+            <button class="cart-line-remove" data-name="${name}">✕</button>
+        </div>
+    `).join('');
+
+    cartItemsEl.innerHTML = cartKeys.length === 0
+        ? `<div class="cart-empty"><p>🛒 Your cart is empty</p><p>Add some dishes to get started!</p></div>`
+        : linesHTML;
+
+    // Remove item buttons
+    cartItemsEl.querySelectorAll('.cart-line-remove').forEach(btn => {
+        btn.addEventListener('click', () => {
+            delete cart[btn.dataset.name];
+            updateCart();
+        });
+    });
+
+    // Subtotal
+    if (cartSubtotalEl) cartSubtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+}
+
+// ---- WISHLIST ----
+let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+
+document.querySelectorAll('.wishlist-btn').forEach(btn => {
+    const name = btn.closest('.menu-item').dataset.name;
+
+    // Set initial state
+    if (wishlist.includes(name)) {
+        btn.textContent = '♥';
+        btn.classList.add('active');
+    }
+
+    btn.addEventListener('click', () => {
+        if (wishlist.includes(name)) {
+            wishlist = wishlist.filter(n => n !== name);
+            btn.textContent = '♡';
+            btn.classList.remove('active');
+        } else {
+            wishlist.push(name);
+            btn.textContent = '♥';
+            btn.classList.add('active');
+        }
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    });
+});
+
+// ---- PLACE ORDER ----
+if (placeOrderBtn) {
+    placeOrderBtn.addEventListener('click', async () => {
+        const name    = document.getElementById('custName').value.trim();
+        const phone   = document.getElementById('custPhone').value.trim();
+        const pickup  = document.getElementById('custPickup').value.trim();
+        const message = document.getElementById('custMessage').value.trim();
+
+        if (!name || !phone) {
+            showToast('Please enter your name and phone number.', 'warning');
+            return;
+        }
+
+        const cartKeys = Object.keys(cart);
+        if (cartKeys.length === 0) {
+            showToast('Your cart is empty!', 'warning');
+            return;
+        }
+
+        const orderData = {
+            customerName: name,
+            phone: phone,
+            pickup: pickup,
+            message: message,
+            items: cartKeys.map(n => ({
+                dish: n,
+                quantity: cart[n].qty,
+                price: cart[n].price
+            })),
+            total: cartKeys.reduce((acc, n) => acc + cart[n].price * cart[n].qty, 0)
+        }
+
+        try {
+            const response = await fetch('http://localhost:3000/order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData)
+            });
+
+            const data = await response.json();
+
+            if (data.message === 'Order placed successfully!') {
+                cart = {};
+                updateCart();
+                closeCart();
+                showToast('Order placed! We will contact you shortly.', 'success');
+            } else {
+                showToast('Something went wrong. Please try again.', 'warning');
+            }
+
+        } catch (err) {
+            console.error('Order error:', err);
+            showToast('Could not connect to server. Please try again.', 'warning');
+        }
+    });
 }

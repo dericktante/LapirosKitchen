@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu – Lapiros Kitchen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <nav class="navbar" id="navBar">
         <div class="nav-container">
+            <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
             <a href="index.html" class="nav-logo">
                 <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="logo-img">
             </a>
@@ -22,18 +29,48 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <!-- Order Now button removed -->
-            <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
+            <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
             </button>
         </div>
     </nav>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" id="cartClose">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty" id="cartEmpty">
+                <p>🛒 Your cart is empty</p>
+                <p>Add some dishes to get started!</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display:none;">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">$0.00</span>
+            </div>
+            <div class="cart-checkout-form">
+                <h4>Your Details</h4>
+                <input type="text" id="custName" placeholder="Full name" required>
+                <input type="tel" id="custPhone" placeholder="Phone number" required>
+                <input type="text" id="custPickup" placeholder="Preferred pickup date/time">
+                <textarea id="custMessage" placeholder="Special requests? (optional)" rows="2"></textarea>
+            </div>
+            <button class="btn btn-green" id="placeOrderBtn" style="width:100%;">Place Order</button>
+        </div>
+    </div>
 
     <div class="page-hero">
         <div class="container">
             <p class="section-label" style="color: var(--gold);">Authentic Flavors</p>
             <h1 class="page-title">Our Menu</h1>
-            <p class="page-sub">Traditional Cameroonian dishes made fresh daily with authentic spices and ingredients.</p>
+            <p class="page-sub">Traditional Cameroonian dishes made fresh daily with authentic spices and ingredients.
+            </p>
         </div>
     </div>
 
@@ -43,76 +80,178 @@
                 <input type="text" id="menuSearch" class="menu-search" placeholder="Search for a dish...">
             </div>
             <div class="menu-items">
-                    <!-- Add new dishes below in this format: -->
-                    <!-- <div class="menu-item">
+                <!-- Add new dishes below in this format: -->
+                <!-- <div class="menu-item">
                            <div class="menu-item-image"><img src="images/IMAGE_NAME.jpg" alt="Dish Name"></div>
                            <h4 class="item-name">Dish Name</h4>
                            <div class="item-price">$PRICE</div>
                        </div> -->
-                    <div class="menu-item">
-                        <div class="menu-item-image"><img src="images/Suya.jpg" alt="Suya"></div>
-                        <h4 class="item-name">Suya <span class="special-badge">Chef's Special</span></h4>
-                        <div class="item-price">$16</div>
+                <div class="menu-item" data-name="Suya" data-price="16">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <div class="menu-item-image"><img src="images/Suya.jpg" alt="Suya"></div>
+                    <h4 class="item-name">Suya</h4>
+                    <div class="item-price">$16</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
-                    <div class="menu-item">
-                        <div class="menu-item-image"><img src="images/Eru.jpg" alt="Eru"></div>
-                        <h4 class="item-name">Eru</h4>
-                        <div class="item-price">$16</div>
+                </div>
+                <div class="menu-item" data-name="Eru" data-price="16">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <div class="menu-item-image"><img src="images/Eru.jpg" alt="Eru"></div>
+                    <h4 class="item-name">Eru</h4>
+                    <div class="item-price">$16</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
-                    <div class="menu-item">
-                        <div class="menu-item-image"><img src="images/Ndole.jpg" alt="Ndole"></div>
-                        <h4 class="item-name">Ndole</h4>
-                        <div class="item-price">$18</div>
+                </div>
+                <div class="menu-item" data-name="Ndole" data-price="18">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <div class="menu-item-image"><img src="images/Ndole.jpg" alt="Ndole"></div>
+                    <h4 class="item-name">Ndole</h4>
+                    <div class="item-price">$18</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
-                    <div class="menu-item">
-                        <div class="menu-item-image"><img src="images/Koki.jpg" alt="Koki"></div>
-                        <h4 class="item-name">Koki</h4>
-                        <div class="item-price">$12</div>
+                </div>
+                <div class="menu-item" data-name="Koki" data-price="12">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <div class="menu-item-image"><img src="images/Koki.jpg" alt="Koki"></div>
+                    <h4 class="item-name">Koki</h4>
+                    <div class="item-price">$12</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
-                    <div class="menu-item">
-                        <div class="menu-item-image"><img src="images/Achu.jpg" alt="Achu Soup"></div>
-                        <h4 class="item-name">Achu Soup</h4>
-                        <div class="item-price">$20</div>
+                </div>
+                <div class="menu-item" data-name="Achu Soup" data-price="20">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <div class="menu-item-image"><img src="images/Achu.jpg" alt="Achu Soup"></div>
+                    <h4 class="item-name">Achu Soup</h4>
+                    <div class="item-price">$20</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
-                    <div class="menu-item">
-                        <h4 class="item-name">Pepper Soup</h4>
-                        <div class="item-price">$15</div>
+                </div>
+                <div class="menu-item" data-name="Pepper Soup" data-price="15">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <h4 class="item-name">Pepper Soup</h4>
+                    <div class="item-price">$15</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
-                    <div class="menu-item">
-                        <div class="menu-item-image"><img src="images/Ekwang.jpg" alt="Ekwang"></div>
-                        <h4 class="item-name">Ekwang</h4>
-                        <div class="item-price">$18</div>
+                </div>
+                <div class="menu-item" data-name="Ekwang" data-price="18">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <div class="menu-item-image"><img src="images/Ekwang.jpg" alt="Ekwang"></div>
+                    <h4 class="item-name">Ekwang</h4>
+                    <div class="item-price">$18</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
-                    <div class="menu-item">
-                        <h4 class="item-name">Jollof Rice</h4>
-                        <div class="item-price">$14</div>
+                </div>
+                <div class="menu-item" data-name="Jollof Rice" data-price="14">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <h4 class="item-name">Jollof Rice</h4>
+                    <div class="item-price">$14</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
-                    <div class="menu-item">
-                        <div class="menu-item-image"><img src="images/Fried Rice.jpg" alt="Fried Rice"></div>
-                        <h4 class="item-name">Fried Rice</h4>
-                        <div class="item-price">$15</div>
+                </div>
+                <div class="menu-item" data-name="Fried Rice" data-price="15">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <div class="menu-item-image"><img src="images/Fried Rice.jpg" alt="Fried Rice"></div>
+                    <h4 class="item-name">Fried Rice</h4>
+                    <div class="item-price">$15</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
-                    <div class="menu-item">
-                        <div class="menu-item-image"><img src="images/Roasted Fish.jpg" alt="Grilled Fish"></div>
-                        <h4 class="item-name">Grilled Fish</h4>
-                        <div class="item-price">$22</div>
+                </div>
+                <div class="menu-item" data-name="Grilled Fish" data-price="22">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <div class="menu-item-image"><img src="images/Roasted Fish.jpg" alt="Grilled Fish"></div>
+                    <h4 class="item-name">Grilled Fish</h4>
+                    <div class="item-price">$22</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
-                    <div class="menu-item">
-                        <h4 class="item-name">Fried Plantains</h4>
-                        <div class="item-price">$6</div>
+                </div>
+                <div class="menu-item" data-name="Fried Plantains" data-price="6">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <h4 class="item-name">Fried Plantains</h4>
+                    <div class="item-price">$6</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
-                    <div class="menu-item">
-                        <div class="menu-item-image"><img src="images/Pepper.jpg" alt="Pepper"></div>
-                        <h4 class="item-name">Pepper</h4>
-                        <div class="item-price">$5</div>
+                </div>
+                <div class="menu-item" data-name="Pepper" data-price="5">
+                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <div class="menu-item-image"><img src="images/Pepper.jpg" alt="Pepper"></div>
+                    <h4 class="item-name">Pepper</h4>
+                    <div class="item-price">$5</div>
+                    <div class="item-controls">
+                        <div class="qty-control">
+                            <button class="qty-btn minus">−</button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="add-to-cart-btn">Add to Cart</button>
                     </div>
                 </div>
             </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Order Now section removed -->
         </div>
     </section>
 
@@ -125,22 +264,27 @@
                     <div class="social-links">
                         <a href="tel:4052273385" class="social-link">📞</a>
                         <a href="sms:4052273385" class="social-link">💬</a>
-                        <a href="/cdn-cgi/l/email-protection#51333023383a303d383d112830393e3e7f323e3c" class="social-link">📧</a>
+                        <a href="/cdn-cgi/l/email-protection#51333023383a303d383d112830393e3e7f323e3c"
+                            class="social-link">📧</a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="menu.html">Menu</a></li>
-                        <li><a href="order.html">Order Online</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
+                        <li><a href="shipping.html">Shipping Policy</a></li>
+                        <li><a href="refunds.html">Refund Policy</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <p><a href="tel:4052273385">(405) 227-3385</a></p>
-                    <p><a href="/cdn-cgi/l/email-protection#0d6f6c7f64666c6164614d746c656262236e6260"><span class="__cf_email__" data-cfemail="7e1c1f0c17151f1217123e071f161111501d1113">[email&#160;protected]</span></a></p>
+                    <p><a href="/cdn-cgi/l/email-protection#0d6f6c7f64666c6164614d746c656262236e6260"><span
+                                class="__cf_email__"
+                                data-cfemail="7e1c1f0c17151f1217123e071f161111501d1113">[email&#160;protected]</span></a>
+                    </p>
                     <p>12405 Coywood<br>Oklahoma City, OK 73142</p>
                 </div>
                 <div class="footer-col">
@@ -159,4 +303,5 @@
     </footer>
     <script src="script.js"></script>
 </body>
-</html>        
+
+</html>
