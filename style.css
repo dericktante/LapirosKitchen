@@ -1335,31 +1335,27 @@ ul { list-style: none; }
 
 .menu-items {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 48px 32px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 48px 24px;
     padding: 0 20px;
 }
 
 .menu-item {
+    position: relative;
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background: #fff;
-    border-radius: 22px;
-    box-shadow: 0 6px 32px rgba(30,58,15,0.07);
-    overflow: hidden;
-    padding: 0 0 18px 0;
-    border: none;
-    transition: box-shadow var(--transition), transform var(--transition);
-}
+    align-items: flex-start;
 
-.menu-item:hover {
-    box-shadow: 0 12px 48px rgba(30,58,15,0.13);
-    transform: translateY(-6px) scale(1.02);
 }
 
 .menu-item:last-child { border-bottom: none; }
-.menu-item:hover { background: var(--warm-white); }
+
 
 .menu-item-image {
     width: 100%;
@@ -1379,9 +1375,6 @@ ul { list-style: none; }
     object-fit: cover;
     background: #f5f1e8;
     transition: transform 0.4s cubic-bezier(.4,1.7,.7,.8);
-}
-.menu-item:hover .menu-item-image img {
-    transform: scale(1.06) rotate(-1deg);
 }
 
 .item-info {
