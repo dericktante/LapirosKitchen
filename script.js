@@ -419,11 +419,12 @@ if (placeOrderBtn) {
     placeOrderBtn.addEventListener('click', async () => {
         const name = document.getElementById('custName').value.trim();
         const phone = document.getElementById('custPhone').value.trim();
+        const email = document.getElementById('custEmail').value.trim();
         const pickup = document.getElementById('custPickup').value.trim();
         const message = document.getElementById('custMessage').value.trim();
 
-        if (!name || !phone) {
-            showToast('Please enter your name and phone number.', 'warning');
+        if (!name || !phone || !email) {
+            showToast('Please enter your name, phone number, and email address.', 'warning');
             return;
         }
 
@@ -436,6 +437,7 @@ if (placeOrderBtn) {
         const orderData = {
             customerName: name,
             phone: phone,
+            email: email,
             pickup: pickup,
             message: message,
             items: cartKeys.map(n => ({
