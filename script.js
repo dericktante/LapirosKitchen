@@ -61,7 +61,7 @@ if (navToggleBtn && navMenuList) {
 
 // ---- SMOOTH SCROLL FOR ANCHOR LINKS — all pages ----
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
             e.preventDefault();
@@ -82,9 +82,9 @@ const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const name    = document.getElementById('name').value.trim();
-        const phone   = document.getElementById('phone').value.trim();
-        const email   = document.getElementById('email').value.trim();
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
         const message = document.getElementById('message').value.trim();
 
         try {
@@ -114,8 +114,8 @@ const reviewForm = document.getElementById('reviewForm');
 if (reviewForm) {
     reviewForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const name   = document.getElementById('reviewName').value.trim();
-        const email  = document.getElementById('reviewEmail').value.trim();
+        const name = document.getElementById('reviewName').value.trim();
+        const email = document.getElementById('reviewEmail').value.trim();
         const rating = document.getElementById('rating').value;
         const review = document.getElementById('reviewMessage').value.trim();
 
@@ -163,7 +163,7 @@ if (menuItemsEl) {
             menuItemsEl.innerHTML = dishes.map(dish => `
                 <div class="menu-item" data-name="${dish.name}" data-price="${dish.price}">
                     <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
-                    ${dish.image_url ? `<div class="menu-item-image"><img src="${dish.image_url}" alt="${dish.name}" loading="lazy"></div>` : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
+                    ${dish.image_url ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiroskitchen.netlify.app/' + dish.image_url}" alt="${dish.name}" loading="lazy"></div>` : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
                     <h4 class="item-name">${dish.name}</h4>
                     <div class="item-price">$${dish.price}</div>
                     <div class="item-controls">
@@ -263,16 +263,16 @@ function showToast(msg, type = 'success') {
 let cart = {}; // { "Dish Name": { price, qty } }
 
 // ---- CART ELEMENTS ----
-const cartBtn     = document.getElementById('cartBtn');
+const cartBtn = document.getElementById('cartBtn');
 const cartSidebar = document.getElementById('cartSidebar');
 const cartOverlay = document.getElementById('cartOverlay');
-const cartClose   = document.getElementById('cartClose');
-const cartEmpty   = document.getElementById('cartEmpty');
-const cartFooter  = document.getElementById('cartFooter');
+const cartClose = document.getElementById('cartClose');
+const cartEmpty = document.getElementById('cartEmpty');
+const cartFooter = document.getElementById('cartFooter');
 const cartItemsEl = document.getElementById('cartItems');
 const cartCountEl = document.getElementById('cartCount');
 const cartSubtotalEl = document.getElementById('cartSubtotal');
-const placeOrderBtn  = document.getElementById('placeOrderBtn');
+const placeOrderBtn = document.getElementById('placeOrderBtn');
 
 // ---- OPEN/CLOSE CART ----
 if (cartBtn) {
@@ -298,65 +298,66 @@ function closeCart() {
 // ---- ADD TO CART ----
 function initCart() {
     document.querySelectorAll('.menu-item').forEach(item => {
-    const name  = item.dataset.name;
-    const price = parseFloat(item.dataset.price);
-    const addBtn  = item.querySelector('.add-to-cart-btn');
-    const minusBtn = item.querySelector('.qty-btn.minus');
-    const plusBtn  = item.querySelector('.qty-btn.plus');
-    const qtyVal   = item.querySelector('.qty-val');
+        const name = item.dataset.name;
+        const price = parseFloat(item.dataset.price);
+        const addBtn = item.querySelector('.add-to-cart-btn');
+        const minusBtn = item.querySelector('.qty-btn.minus');
+        const plusBtn = item.querySelector('.qty-btn.plus');
+        const qtyVal = item.querySelector('.qty-val');
 
-    let qty = 1;
+        let qty = 1;
 
-    if (minusBtn) {
-        minusBtn.addEventListener('click', () => {
-            if (qty > 1) {
-                qty--;
+        if (minusBtn) {
+            minusBtn.addEventListener('click', () => {
+                if (qty > 1) {
+                    qty--;
+                    qtyVal.textContent = qty;
+                }
+            });
+        }
+
+        if (plusBtn) {
+            plusBtn.addEventListener('click', () => {
+                qty++;
                 qtyVal.textContent = qty;
-            }
-        });
-    }
+            });
+        }
 
-    if (plusBtn) {
-        plusBtn.addEventListener('click', () => {
-            qty++;
-            qtyVal.textContent = qty;
-        });
-    }
-
-    if (addBtn) {
-        addBtn.addEventListener('click', () => {
-            const isFirstItem = Object.keys(cart).length === 0;
-            if (cart[name]) {
-                cart[name].qty += qty;
-            } else {
-                cart[name] = { price, qty };
-            }
-            updateCart();
-            // Only open cart on first item added
-            if (isFirstItem) {
-                cartSidebar.classList.add('active');
-                cartOverlay.classList.add('active');
-            }
-            // Reset qty
-            qty = 1;
-            qtyVal.textContent = 1;
-        });
-    }
-})};
+        if (addBtn) {
+            addBtn.addEventListener('click', () => {
+                const isFirstItem = Object.keys(cart).length === 0;
+                if (cart[name]) {
+                    cart[name].qty += qty;
+                } else {
+                    cart[name] = { price, qty };
+                }
+                updateCart();
+                // Only open cart on first item added
+                if (isFirstItem) {
+                    cartSidebar.classList.add('active');
+                    cartOverlay.classList.add('active');
+                }
+                // Reset qty
+                qty = 1;
+                qtyVal.textContent = 1;
+            });
+        }
+    })
+};
 
 // ---- UPDATE CART UI ----
 function updateCart() {
     if (!cartItemsEl) return;
 
-    const cartKeys   = Object.keys(cart);
+    const cartKeys = Object.keys(cart);
     const totalItems = cartKeys.reduce((acc, k) => acc + cart[k].qty, 0);
-    const subtotal   = cartKeys.reduce((acc, k) => acc + cart[k].price * cart[k].qty, 0);
+    const subtotal = cartKeys.reduce((acc, k) => acc + cart[k].price * cart[k].qty, 0);
 
     // Update count badge
     if (cartCountEl) cartCountEl.textContent = totalItems;
 
     // Toggle empty/footer
-    if (cartEmpty)  cartEmpty.style.display  = cartKeys.length === 0 ? '' : 'none';
+    if (cartEmpty) cartEmpty.style.display = cartKeys.length === 0 ? '' : 'none';
     if (cartFooter) cartFooter.style.display = cartKeys.length === 0 ? 'none' : '';
 
     // Render cart lines
@@ -387,37 +388,38 @@ function updateCart() {
 
 // ---- WISHLIST ----
 function initWishlist() {
-let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
 
-document.querySelectorAll('.wishlist-btn').forEach(btn => {
-    const name = btn.closest('.menu-item').dataset.name;
+    document.querySelectorAll('.wishlist-btn').forEach(btn => {
+        const name = btn.closest('.menu-item').dataset.name;
 
-    // Set initial state
-    if (wishlist.includes(name)) {
-        btn.textContent = '♥';
-        btn.classList.add('active');
-    }
-
-    btn.addEventListener('click', () => {
+        // Set initial state
         if (wishlist.includes(name)) {
-            wishlist = wishlist.filter(n => n !== name);
-            btn.textContent = '♡';
-            btn.classList.remove('active');
-        } else {
-            wishlist.push(name);
             btn.textContent = '♥';
             btn.classList.add('active');
         }
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-    });
-})};
+
+        btn.addEventListener('click', () => {
+            if (wishlist.includes(name)) {
+                wishlist = wishlist.filter(n => n !== name);
+                btn.textContent = '♡';
+                btn.classList.remove('active');
+            } else {
+                wishlist.push(name);
+                btn.textContent = '♥';
+                btn.classList.add('active');
+            }
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        });
+    })
+};
 
 // ---- PLACE ORDER ----
 if (placeOrderBtn) {
     placeOrderBtn.addEventListener('click', async () => {
-        const name    = document.getElementById('custName').value.trim();
-        const phone   = document.getElementById('custPhone').value.trim();
-        const pickup  = document.getElementById('custPickup').value.trim();
+        const name = document.getElementById('custName').value.trim();
+        const phone = document.getElementById('custPhone').value.trim();
+        const pickup = document.getElementById('custPickup').value.trim();
         const message = document.getElementById('custMessage').value.trim();
 
         if (!name || !phone) {
