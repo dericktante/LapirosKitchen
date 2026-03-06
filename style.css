@@ -1456,8 +1456,37 @@ ul { list-style: none; }
 @media (max-width: 700px) {
     .menu-items {
         grid-template-columns: repeat(2, 1fr);
-        gap: 24px 12px;
+        gap: 20px 12px;
+        padding: 0;
     }
+
+    .menu-section .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .menu-item {
+        min-width: 0;
+    }
+
+    .item-controls {
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 6px;
+        overflow: hidden;
+    }
+
+    .qty-control {
+        flex-shrink: 0;
+    }
+
+    .add-to-cart-btn {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+
     .menu-item-image {
         min-height: 140px;
         max-height: 180px;
