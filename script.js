@@ -163,7 +163,7 @@ if (menuItemsEl) {
             menuItemsEl.innerHTML = dishes.map(dish => `
                 <div class="menu-item" data-name="${dish.name}" data-price="${dish.price}">
                     <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
-                    ${dish.image_url ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiroskitchen.netlify.app/' + dish.image_url}" alt="${dish.name}" loading="lazy"></div>` : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
+                    ${dish.image_url ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${dish.name}" loading="lazy"></div>` : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
                     <h4 class="item-name">${dish.name}</h4>
                     <div class="item-price">$${dish.price}</div>
                     <div class="item-controls">
