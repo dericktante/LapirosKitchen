@@ -148,6 +148,7 @@ if (reviewForm) {
 
 // ---- LOAD DISHES FROM DATABASE ----
 const menuItemsEl = document.getElementById('menuItems');
+const HEART_SYMBOL = '\u2665\uFE0E';
 
 if (menuItemsEl) {
     fetch('https://lapiros-backend.onrender.com/dishes')
@@ -162,7 +163,7 @@ if (menuItemsEl) {
 
             menuItemsEl.innerHTML = dishes.map(dish => `
                 <div class="menu-item" data-name="${dish.name}" data-price="${dish.price}">
-                    <button class="wishlist-btn" aria-label="Add to wishlist">♡</button>
+                    <button class="wishlist-btn" aria-label="Add to wishlist">${HEART_SYMBOL}</button>
                     ${dish.image_url ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${dish.name}" loading="lazy"></div>` : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
                     <h4 class="item-name">${dish.name}</h4>
                     <div class="item-price">$${dish.price}</div>
@@ -458,19 +459,21 @@ function initWishlist() {
 
         // Set initial state
         if (wishlist.includes(name)) {
-            btn.textContent = '♥';
+            btn.textContent = HEART_SYMBOL;
             btn.classList.add('active');
+        } else {
+            btn.textContent = HEART_SYMBOL;
         }
 
         btn.addEventListener('click', () => {
             if (wishlist.includes(name)) {
                 wishlist = wishlist.filter(n => n !== name);
-                btn.textContent = '♡';
+                btn.textContent = HEART_SYMBOL;
                 btn.classList.remove('active');
                 showToast('Removed from Wishlist', 'warning');
             } else {
                 wishlist.push(name);
-                btn.textContent = '♥';
+                btn.textContent = HEART_SYMBOL;
                 btn.classList.add('active');
                 showToast('Added to Wishlist', 'success');
             }
@@ -521,7 +524,7 @@ function renderWishlist() {
 
             const dishButton = document.querySelector(`.menu-item[data-name="${CSS.escape(name)}"] .wishlist-btn`);
             if (dishButton) {
-                dishButton.textContent = '♡';
+                dishButton.textContent = HEART_SYMBOL;
                 dishButton.classList.remove('active');
             }
 

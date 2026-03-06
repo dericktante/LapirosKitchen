@@ -1785,20 +1785,27 @@ ul { list-style: none; }
     position: relative;
     background: none;
     border: none;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     cursor: pointer;
     padding: 8px;
-    color: var(--green-dark);
+    color: var(--gold);
     font-family: 'DM Sans', sans-serif;
     line-height: 1;
+}
+
+.wishlist-nav-icon {
+    color: var(--gold);
+    line-height: 1;
+    font-size: 1em;
+    font-family: inherit;
 }
 
 .wishlist-count {
     position: absolute;
     top: 0;
     right: 0;
-    background: var(--gold);
-    color: var(--green-dark);
+    background: var(--green-dark);
+    color: #fff;
     font-size: 0.65rem;
     font-weight: 700;
     width: 18px;
@@ -2117,17 +2124,23 @@ ul { list-style: none; }
     right: 10px;
     background: white;
     border: none;
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     cursor: pointer;
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     z-index: 1;
     transition: transform 0.2s;
+    color: #fff;
+    text-shadow: -1px 0 var(--green-dark), 1px 0 var(--green-dark), 0 -1px var(--green-dark), 0 1px var(--green-dark);
+    line-height: 1;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
 }
 
 .wishlist-btn:hover {
@@ -2135,7 +2148,8 @@ ul { list-style: none; }
 }
 
 .wishlist-btn.active {
-    color: red;
+    color: var(--gold);
+    text-shadow: none;
 }
 
 .item-controls {
