@@ -313,17 +313,27 @@ if (custPickupInput) {
 // ---- OPEN/CLOSE CART ----
 if (cartBtn) {
     cartBtn.addEventListener('click', () => {
+        if (cartSidebar && cartSidebar.classList.contains('active')) {
+            closeCart();
+            return;
+        }
+
         if (wishlistSidebar) wishlistSidebar.classList.remove('active');
-        cartSidebar.classList.add('active');
-        cartOverlay.classList.add('active');
+        if (cartSidebar) cartSidebar.classList.add('active');
+        if (cartOverlay) cartOverlay.classList.add('active');
     });
 }
 
 if (wishlistBtn) {
     wishlistBtn.addEventListener('click', () => {
+        if (wishlistSidebar && wishlistSidebar.classList.contains('active')) {
+            closeWishlist();
+            return;
+        }
+
         if (cartSidebar) cartSidebar.classList.remove('active');
-        wishlistSidebar.classList.add('active');
-        cartOverlay.classList.add('active');
+        if (wishlistSidebar) wishlistSidebar.classList.add('active');
+        if (cartOverlay) cartOverlay.classList.add('active');
     });
 }
 
