@@ -1789,6 +1789,8 @@ ul { list-style: none; }
     cursor: pointer;
     padding: 8px;
     color: var(--green-dark);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1;
 }
 
 .wishlist-count {
