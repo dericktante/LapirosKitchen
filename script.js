@@ -273,7 +273,13 @@ const cartItemsEl = document.getElementById('cartItems');
 const cartCountEl = document.getElementById('cartCount');
 const cartSubtotalEl = document.getElementById('cartSubtotal');
 const placeOrderBtn = document.getElementById('placeOrderBtn');
+const wishlistBtn = document.getElementById('wishlistBtn');
+const wishlistSidebar = document.getElementById('wishlistSidebar');
+const wishlistClose = document.getElementById('wishlistClose');
+const wishlistItemsEl = document.getElementById('wishlistItems');
+const wishlistCountEl = document.getElementById('wishlistCount');
 const custPickupInput = document.getElementById('custPickup');
+let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
 
 if (custPickupInput) {
     const showDateTimePicker = () => {
@@ -306,7 +312,16 @@ if (custPickupInput) {
 // ---- OPEN/CLOSE CART ----
 if (cartBtn) {
     cartBtn.addEventListener('click', () => {
+        if (wishlistSidebar) wishlistSidebar.classList.remove('active');
         cartSidebar.classList.add('active');
+        cartOverlay.classList.add('active');
+    });
+}
+
+if (wishlistBtn) {
+    wishlistBtn.addEventListener('click', () => {
+        if (cartSidebar) cartSidebar.classList.remove('active');
+        wishlistSidebar.classList.add('active');
         cartOverlay.classList.add('active');
     });
 }
@@ -315,13 +330,31 @@ if (cartClose) {
     cartClose.addEventListener('click', closeCart);
 }
 
+if (wishlistClose) {
+    wishlistClose.addEventListener('click', closeWishlist);
+}
+
 if (cartOverlay) {
-    cartOverlay.addEventListener('click', closeCart);
+    cartOverlay.addEventListener('click', closePanels);
 }
 
 function closeCart() {
     cartSidebar.classList.remove('active');
-    cartOverlay.classList.remove('active');
+    if (!wishlistSidebar || !wishlistSidebar.classList.contains('active')) {
+        cartOverlay.classList.remove('active');
+    }
+}
+
+function closeWishlist() {
+    if (wishlistSidebar) wishlistSidebar.classList.remove('active');
+    if (!cartSidebar || !cartSidebar.classList.contains('active')) {
+        cartOverlay.classList.remove('active');
+    }
+}
+
+function closePanels() {
+    closeCart();
+    closeWishlist();
 }
 
 // ---- ADD TO CART ----
@@ -417,7 +450,8 @@ function updateCart() {
 
 // ---- WISHLIST ----
 function initWishlist() {
-    let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    renderWishlist();
 
     document.querySelectorAll('.wishlist-btn').forEach(btn => {
         const name = btn.closest('.menu-item').dataset.name;
@@ -433,15 +467,89 @@ function initWishlist() {
                 wishlist = wishlist.filter(n => n !== name);
                 btn.textContent = '♡';
                 btn.classList.remove('active');
+                showToast('Removed from Wishlist', 'warning');
             } else {
                 wishlist.push(name);
                 btn.textContent = '♥';
                 btn.classList.add('active');
+                showToast('Added to Wishlist', 'success');
             }
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            renderWishlist();
         });
     })
 };
+
+function renderWishlist() {
+    if (!wishlistItemsEl) return;
+
+    if (wishlistCountEl) wishlistCountEl.textContent = wishlist.length;
+
+    if (wishlist.length === 0) {
+        wishlistItemsEl.innerHTML = `
+            <div class="wishlist-empty">
+                <p>❤ Your wishlist is empty</p>
+                <p>Tap the heart on dishes you love.</p>
+            </div>
+        `;
+        return;
+    }
+
+    wishlistItemsEl.innerHTML = wishlist.map(name => {
+        const dishCard = document.querySelector(`.menu-item[data-name="${CSS.escape(name)}"]`);
+        const price = dishCard ? parseFloat(dishCard.dataset.price) : null;
+
+        return `
+            <div class="wishlist-line" data-name="${name}">
+                <div class="wishlist-line-meta">
+                    <span class="wishlist-line-name">${name}</span>
+                    <span class="wishlist-line-price">${price !== null ? `$${price.toFixed(2)}` : 'Price available on menu'}</span>
+                </div>
+                <div class="wishlist-line-actions">
+                    <button class="wishlist-line-add" data-name="${name}">Add to cart</button>
+                    <button class="wishlist-line-remove" data-name="${name}" aria-label="Remove from wishlist">✕</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    wishlistItemsEl.querySelectorAll('.wishlist-line-remove').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const name = btn.dataset.name;
+            wishlist = wishlist.filter(item => item !== name);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+
+            const dishButton = document.querySelector(`.menu-item[data-name="${CSS.escape(name)}"] .wishlist-btn`);
+            if (dishButton) {
+                dishButton.textContent = '♡';
+                dishButton.classList.remove('active');
+            }
+
+            showToast('Removed from Wishlist', 'warning');
+            renderWishlist();
+        });
+    });
+
+    wishlistItemsEl.querySelectorAll('.wishlist-line-add').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const name = btn.dataset.name;
+            const dishCard = document.querySelector(`.menu-item[data-name="${CSS.escape(name)}"]`);
+            if (!dishCard) {
+                showToast('Dish not found in menu right now.', 'warning');
+                return;
+            }
+
+            const price = parseFloat(dishCard.dataset.price);
+            if (cart[name]) {
+                cart[name].qty += 1;
+            } else {
+                cart[name] = { price, qty: 1 };
+            }
+            updateCart();
+            showToast('Added to cart from Wishlist', 'success');
+        });
+    });
+}
 
 // ---- PLACE ORDER ----
 if (placeOrderBtn) {

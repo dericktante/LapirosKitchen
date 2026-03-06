@@ -35,6 +35,10 @@
                 🛒
                 <span class="cart-count" id="cartCount">0</span>
             </button>
+            <button class="wishlist-nav-btn" id="wishlistBtn" aria-label="Open wishlist">
+                ❤
+                <span class="wishlist-count" id="wishlistCount">0</span>
+            </button>
         </div>
     </nav>
 
@@ -65,6 +69,19 @@
                 <textarea id="custMessage" placeholder="Special requests? (optional)" rows="2"></textarea>
             </div>
             <button class="btn btn-green" id="placeOrderBtn" style="width:100%;">Place Order</button>
+        </div>
+    </div>
+
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>Your Wishlist</h3>
+            <button class="wishlist-close" id="wishlistClose">✕</button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems">
+            <div class="wishlist-empty">
+                <p>❤ Your wishlist is empty</p>
+                <p>Tap the heart on dishes you love.</p>
+            </div>
         </div>
     </div>
 
