@@ -501,7 +501,7 @@ function renderWishlist() {
     if (wishlist.length === 0) {
         wishlistItemsEl.innerHTML = `
             <div class="wishlist-empty">
-                <p>❤ Your wishlist is empty</p>
+                <p><span class="wishlist-empty-heart" aria-hidden="true">&#9829;&#65038;</span> Your wishlist is empty</p>
                 <p>Tap the heart on dishes you love.</p>
             </div>
         `;

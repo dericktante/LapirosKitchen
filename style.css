@@ -1924,6 +1924,11 @@ ul { list-style: none; }
     margin-top: 60px;
 }
 
+.wishlist-empty-heart {
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+}
+
 .wishlist-line {
     display: grid;
     grid-template-columns: 1fr auto;
