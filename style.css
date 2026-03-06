@@ -1964,8 +1964,9 @@ ul { list-style: none; }
 .item-controls {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-top: 12px;
+    justify-content: center;
+    width: fit-content;
+    margin: 12px auto 0;
     gap: 8px;
 }
 
@@ -2009,7 +2010,7 @@ ul { list-style: none; }
     font-size: 0.85rem;
     cursor: pointer;
     transition: background 0.2s;
-    flex: 1;
+    flex: 0 0 auto;
 }
 
 .add-to-cart-btn:hover {
