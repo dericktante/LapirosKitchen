@@ -38,6 +38,9 @@ const navToggleBtn = document.getElementById('navToggleBtn');
 const navMenuList = document.getElementById('navMenuList');
 
 if (navToggleBtn && navMenuList) {
+    navToggleBtn.setAttribute('aria-controls', 'navMenuList');
+    navToggleBtn.setAttribute('aria-expanded', 'false');
+
     navToggleBtn.addEventListener('click', () => {
         navMenuList.classList.toggle('active');
         navToggleBtn.setAttribute('aria-expanded', navMenuList.classList.contains('active'));
@@ -46,12 +49,14 @@ if (navToggleBtn && navMenuList) {
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', () => {
             navMenuList.classList.remove('active');
+            navToggleBtn.setAttribute('aria-expanded', 'false');
         });
     });
     // Only close menu on outside click if menu is open
     document.addEventListener('click', (e) => {
         if (navMenuList.classList.contains('active') && !navBar.contains(e.target)) {
             navMenuList.classList.remove('active');
+            navToggleBtn.setAttribute('aria-expanded', 'false');
         }
     });
 }
@@ -163,17 +168,17 @@ if (menuItemsEl) {
 
             menuItemsEl.innerHTML = dishes.map(dish => `
                 <div class="menu-item" data-name="${dish.name}" data-price="${dish.price}">
-                    <button class="wishlist-btn" aria-label="Add to wishlist">${HEART_SYMBOL}</button>
+                    <button class="wishlist-btn" type="button" aria-label="Add to wishlist">${HEART_SYMBOL}</button>
                     ${dish.image_url ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${dish.name}" loading="lazy"></div>` : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
                     <h4 class="item-name">${dish.name}</h4>
                     <div class="item-price">$${dish.price}</div>
                     <div class="item-controls">
                         <div class="qty-control">
-                            <button class="qty-btn minus">−</button>
+                            <button class="qty-btn minus" type="button" aria-label="Decrease quantity">−</button>
                             <span class="qty-val">1</span>
-                            <button class="qty-btn plus">+</button>
+                            <button class="qty-btn plus" type="button" aria-label="Increase quantity">+</button>
                         </div>
-                        <button class="add-to-cart-btn">Add to Cart</button>
+                        <button class="add-to-cart-btn" type="button">Add to Cart</button>
                     </div>
                 </div>
             `).join('');
@@ -312,6 +317,8 @@ if (custPickupInput) {
 
 // ---- OPEN/CLOSE CART ----
 if (cartBtn) {
+    cartBtn.setAttribute('aria-expanded', 'false');
+
     cartBtn.addEventListener('click', () => {
         if (cartSidebar && cartSidebar.classList.contains('active')) {
             closeCart();
@@ -319,12 +326,16 @@ if (cartBtn) {
         }
 
         if (wishlistSidebar) wishlistSidebar.classList.remove('active');
+        if (wishlistBtn) wishlistBtn.setAttribute('aria-expanded', 'false');
         if (cartSidebar) cartSidebar.classList.add('active');
+        if (cartBtn) cartBtn.setAttribute('aria-expanded', 'true');
         if (cartOverlay) cartOverlay.classList.add('active');
     });
 }
 
 if (wishlistBtn) {
+    wishlistBtn.setAttribute('aria-expanded', 'false');
+
     wishlistBtn.addEventListener('click', () => {
         if (wishlistSidebar && wishlistSidebar.classList.contains('active')) {
             closeWishlist();
@@ -332,7 +343,9 @@ if (wishlistBtn) {
         }
 
         if (cartSidebar) cartSidebar.classList.remove('active');
+        if (cartBtn) cartBtn.setAttribute('aria-expanded', 'false');
         if (wishlistSidebar) wishlistSidebar.classList.add('active');
+        if (wishlistBtn) wishlistBtn.setAttribute('aria-expanded', 'true');
         if (cartOverlay) cartOverlay.classList.add('active');
     });
 }
@@ -349,8 +362,15 @@ if (cartOverlay) {
     cartOverlay.addEventListener('click', closePanels);
 }
 
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closePanels();
+    }
+});
+
 function closeCart() {
     cartSidebar.classList.remove('active');
+    if (cartBtn) cartBtn.setAttribute('aria-expanded', 'false');
     if (!wishlistSidebar || !wishlistSidebar.classList.contains('active')) {
         cartOverlay.classList.remove('active');
     }
@@ -358,6 +378,7 @@ function closeCart() {
 
 function closeWishlist() {
     if (wishlistSidebar) wishlistSidebar.classList.remove('active');
+    if (wishlistBtn) wishlistBtn.setAttribute('aria-expanded', 'false');
     if (!cartSidebar || !cartSidebar.classList.contains('active')) {
         cartOverlay.classList.remove('active');
     }
@@ -439,7 +460,7 @@ function updateCart() {
             <span class="cart-line-name">${name}</span>
             <span class="cart-line-qty">×${cart[name].qty}</span>
             <span class="cart-line-price">$${(cart[name].price * cart[name].qty).toFixed(2)}</span>
-            <button class="cart-line-remove" data-name="${name}">✕</button>
+            <button class="cart-line-remove" type="button" data-name="${name}" aria-label="Remove ${name} from cart">✕</button>
         </div>
     `).join('');
 
@@ -519,8 +540,8 @@ function renderWishlist() {
                     <span class="wishlist-line-price">${price !== null ? `$${price.toFixed(2)}` : 'Price available on menu'}</span>
                 </div>
                 <div class="wishlist-line-actions">
-                    <button class="wishlist-line-add" data-name="${name}">Add to cart</button>
-                    <button class="wishlist-line-remove" data-name="${name}" aria-label="Remove from wishlist">✕</button>
+                    <button class="wishlist-line-add" type="button" data-name="${name}" aria-label="Add ${name} to cart">Add to cart</button>
+                    <button class="wishlist-line-remove" type="button" data-name="${name}" aria-label="Remove ${name} from wishlist">✕</button>
                 </div>
             </div>
         `;

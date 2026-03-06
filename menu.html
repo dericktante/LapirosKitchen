@@ -17,7 +17,7 @@
 
     <nav class="navbar" id="navBar">
         <div class="nav-container">
-            <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle menu">
+            <button class="nav-toggle-btn" id="navToggleBtn" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenuList">
                 <span></span><span></span><span></span>
             </button>
             <a href="index.html" class="nav-logo">
@@ -31,11 +31,11 @@
                 <li class="nav-mobile-only"><a href="shipping.html">Shipping Policy</a></li>
                 <li class="nav-mobile-only"><a href="refunds.html">Refund Policy</a></li>
             </ul>
-            <button class="wishlist-nav-btn" id="wishlistBtn" aria-label="Open wishlist">
+            <button class="wishlist-nav-btn" id="wishlistBtn" type="button" aria-label="Open wishlist">
                 <span class="wishlist-nav-icon" aria-hidden="true">&#9829;&#65038;</span>
                 <span class="wishlist-count" id="wishlistCount">0</span>
             </button>
-            <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+            <button class="cart-btn" id="cartBtn" type="button" aria-label="Open cart">
                 🛒
                 <span class="cart-count" id="cartCount">0</span>
             </button>
@@ -47,7 +47,7 @@
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h3>Your Cart</h3>
-            <button class="cart-close" id="cartClose">✕</button>
+            <button class="cart-close" id="cartClose" type="button" aria-label="Close cart">✕</button>
         </div>
         <div class="cart-items" id="cartItems">
             <div class="cart-empty" id="cartEmpty">
@@ -62,11 +62,11 @@
             </div>
             <div class="cart-checkout-form">
                 <h4>Your Details</h4>
-                <input type="text" id="custName" placeholder="Full name" required>
-                <input type="tel" id="custPhone" placeholder="Phone number" required>
-                <input type="email" id="custEmail" placeholder="Email address" required>
-                <input type="text" id="custPickup" placeholder="Preferred pickup date/time" autocomplete="off" inputmode="none">
-                <textarea id="custMessage" placeholder="Special requests? (optional)" rows="2"></textarea>
+                <input type="text" id="custName" placeholder="Full name" aria-label="Full name" required>
+                <input type="tel" id="custPhone" placeholder="Phone number" aria-label="Phone number" required>
+                <input type="email" id="custEmail" placeholder="Email address" aria-label="Email address" required>
+                <input type="text" id="custPickup" placeholder="Preferred pickup date/time" aria-label="Preferred pickup date and time" autocomplete="off" inputmode="none">
+                <textarea id="custMessage" placeholder="Special requests? (optional)" aria-label="Special requests" rows="2"></textarea>
             </div>
             <button class="btn btn-green" id="placeOrderBtn" style="width:100%;">Place Order</button>
         </div>
@@ -75,7 +75,7 @@
     <div class="wishlist-sidebar" id="wishlistSidebar">
         <div class="wishlist-header">
             <h3>Your Wishlist</h3>
-            <button class="wishlist-close" id="wishlistClose">✕</button>
+            <button class="wishlist-close" id="wishlistClose" type="button" aria-label="Close wishlist">✕</button>
         </div>
         <div class="wishlist-items" id="wishlistItems">
             <div class="wishlist-empty">
