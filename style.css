@@ -1950,6 +1950,19 @@ ul { list-style: none; }
     transition: border 0.2s;
 }
 
+.cart-checkout-form input::placeholder,
+.cart-checkout-form textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.cart-checkout-form input[type="datetime-local"],
+.cart-checkout-form input#custPickup {
+    min-height: 42px;
+    background: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
 .cart-checkout-form input:focus,
 .cart-checkout-form textarea:focus {
     border-color: var(--green-mid);

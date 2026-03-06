@@ -273,6 +273,35 @@ const cartItemsEl = document.getElementById('cartItems');
 const cartCountEl = document.getElementById('cartCount');
 const cartSubtotalEl = document.getElementById('cartSubtotal');
 const placeOrderBtn = document.getElementById('placeOrderBtn');
+const custPickupInput = document.getElementById('custPickup');
+
+if (custPickupInput) {
+    const showDateTimePicker = () => {
+        if (custPickupInput.type !== 'datetime-local') {
+            custPickupInput.type = 'datetime-local';
+        }
+
+        if (typeof custPickupInput.showPicker === 'function') {
+            try {
+                custPickupInput.showPicker();
+            } catch (_error) {
+                // showPicker may throw when not triggered by a trusted user interaction.
+            }
+        }
+    };
+
+    const restorePlaceholderIfEmpty = () => {
+        if (!custPickupInput.value) {
+            custPickupInput.type = 'text';
+        }
+    };
+
+    custPickupInput.addEventListener('focus', showDateTimePicker);
+    custPickupInput.addEventListener('blur', restorePlaceholderIfEmpty);
+
+    // Keep a native date input only when a value exists.
+    restorePlaceholderIfEmpty();
+}
 
 // ---- OPEN/CLOSE CART ----
 if (cartBtn) {
