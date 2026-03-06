@@ -168,7 +168,7 @@ if (menuItemsEl) {
 
             menuItemsEl.innerHTML = dishes.map(dish => `
                 <div class="menu-item" data-name="${dish.name}" data-price="${dish.price}">
-                    <button class="wishlist-btn" type="button" aria-label="Add to wishlist">${HEART_SYMBOL}</button>
+                    <button class="wishlist-btn" type="button" aria-label="Add to Wishlist">${HEART_SYMBOL}</button>
                     ${dish.image_url ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${dish.name}" loading="lazy"></div>` : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
                     <h4 class="item-name">${dish.name}</h4>
                     <div class="item-price">$${dish.price}</div>
@@ -540,8 +540,8 @@ function renderWishlist() {
                     <span class="wishlist-line-price">${price !== null ? `$${price.toFixed(2)}` : 'Price available on menu'}</span>
                 </div>
                 <div class="wishlist-line-actions">
-                    <button class="wishlist-line-add" type="button" data-name="${name}" aria-label="Add ${name} to cart">Add to cart</button>
-                    <button class="wishlist-line-remove" type="button" data-name="${name}" aria-label="Remove ${name} from wishlist">✕</button>
+                    <button class="wishlist-line-add" type="button" data-name="${name}" aria-label="Add ${name} to Cart">Add to Cart</button>
+                    <button class="wishlist-line-remove" type="button" data-name="${name}" aria-label="Remove ${name} from Wishlist">✕</button>
                 </div>
             </div>
         `;
@@ -580,7 +580,7 @@ function renderWishlist() {
                 cart[name] = { price, qty: 1 };
             }
             updateCart();
-            showToast('Added to cart from Wishlist', 'success');
+            showToast('Added to Cart from Wishlist', 'success');
         });
     });
 }
