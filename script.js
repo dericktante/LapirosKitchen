@@ -451,22 +451,18 @@ if (todayMenuGrid) {
                 return;
             }
             todayMenuGrid.innerHTML = dishes.map(dish => `
-                <div class="dish-card">
-                    <div class="dish-img-wrap" style="position:relative;">
+                <div class="menu-item ${dish.sold_out ? 'menu-item-sold-out' : ''}" data-name="${dish.name}" data-price="${dish.price}">
+                    <div style="position:relative; width:100%;">
                         ${dish.image_url
-                            ? `<img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${dish.name}" loading="lazy">`
-                            : `<div style="width:100%;height:200px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:3rem;">🍽️</div>`}
-                        ${dish.sold_out ? `<div style="position:absolute;top:10px;left:10px;background:rgba(229,62,62,0.9);color:white;font-size:0.75rem;font-weight:700;padding:4px 12px;border-radius:20px;">Sold Out</div>` : ''}
+                            ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${dish.name}" loading="lazy"></div>`
+                            : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
+                        ${dish.sold_out ? `<div style="position:absolute;top:8px;left:8px;background:rgba(229,62,62,0.9);color:white;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;">Sold Out</div>` : ''}
                     </div>
-                    <div class="dish-info">
-                        <div class="dish-top">
-                            <h3>${dish.name}</h3>
-                            <span class="dish-price">$${dish.price}</span>
-                        </div>
-                        ${dish.sold_out
-                            ? `<a href="menu.html" class="btn btn-outline-dark" style="margin-top:8px;font-size:0.85rem;">See Full Menu</a>`
-                            : `<a href="menu.html" class="btn btn-green" style="margin-top:8px;font-size:0.85rem;">Order for Pickup</a>`}
-                    </div>
+                    <h4 class="item-name">${dish.name}</h4>
+                    <div class="item-price">$${dish.price}</div>
+                    ${dish.sold_out
+                        ? `<a href="menu.html" class="btn btn-outline-dark" style="margin-top:8px;font-size:0.85rem;">See Full Menu</a>`
+                        : `<a href="menu.html" class="btn btn-green" style="margin-top:8px;font-size:0.85rem;">Order for Pickup</a>`}
                 </div>
             `).join('');
         })
