@@ -2419,3 +2419,13 @@ ul { list-style: none; }
 .menu-item-sold-out {
     opacity: 0.75;
 }
+
+/* Keep homepage Today's menu CTAs centered across tablet/mobile sizes */
+#todayMenuGrid .menu-item {
+    align-items: center;
+}
+
+#todayMenuGrid .today-menu-cta {
+    margin-left: auto;
+    margin-right: auto;
+}

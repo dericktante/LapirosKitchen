@@ -461,8 +461,8 @@ if (todayMenuGrid) {
                     <h4 class="item-name">${dish.name}</h4>
                     <div class="item-price">$${dish.price}</div>
                     ${dish.sold_out
-                        ? `<a href="menu.html" class="btn btn-outline-dark" style="margin-top:8px;font-size:0.85rem;">See Full Menu</a>`
-                        : `<a href="menu.html" class="btn btn-green" style="margin-top:8px;font-size:0.85rem;">Order for Pickup</a>`}
+                        ? `<a href="menu.html" class="btn btn-outline-dark today-menu-cta" style="margin-top:8px;font-size:0.85rem;">See Full Menu</a>`
+                        : `<a href="menu.html" class="btn btn-green today-menu-cta" style="margin-top:8px;font-size:0.85rem;">Order Now</a>`}
                 </div>
             `).join('');
         })
