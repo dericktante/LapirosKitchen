@@ -2382,3 +2382,40 @@ ul { list-style: none; }
         display: block;
     }
 }
+/* ============================================
+   MENU PAGE TABS
+   ============================================ */
+.menu-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0;
+}
+
+.menu-tab {
+    padding: 12px 28px;
+    border: none;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text-muted);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s ease;
+}
+
+.menu-tab:hover { color: var(--green-dark); }
+
+.menu-tab.active {
+    color: var(--green-dark);
+    font-weight: 700;
+    border-bottom-color: var(--green-accent);
+}
+
+/* Sold out menu item */
+.menu-item-sold-out {
+    opacity: 0.75;
+}

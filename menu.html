@@ -99,8 +99,22 @@
             <div class="menu-search-wrapper">
                 <input type="text" id="menuSearch" class="menu-search" placeholder="Search for a dish...">
             </div>
-            <div class="menu-items" id="menuItems">
-                <div class="menu-loading">Loading dishes...</div>
+            <!-- TABS -->
+            <div class="menu-tabs" id="menuTabs">
+                <button class="menu-tab active" id="tabToday" onclick="switchMenuTab('today')">🌅 Today</button>
+                <button class="menu-tab" id="tabFull" onclick="switchMenuTab('full')">🍽️ Full Menu</button>
+            </div>
+            <!-- TODAY TAB -->
+            <div id="todayTabContent">
+                <div class="menu-items" id="todayItems">
+                    <div class="menu-loading">Loading today's menu...</div>
+                </div>
+            </div>
+            <!-- FULL MENU TAB -->
+            <div id="fullTabContent" style="display:none;">
+                <div class="menu-items" id="menuItems">
+                    <div class="menu-loading">Loading dishes...</div>
+                </div>
             </div>
         </div>
     </section>

@@ -123,71 +123,16 @@
         </div>
     </section>
 
-    <!-- FEATURED DISHES -->
-    <section class="featured section-pad" id="featured">
+    <!-- TODAY'S MENU -->
+    <section class="featured section-pad" id="today">
         <div class="container">
             <div class="section-header reveal visible">
-                <p class="section-label">Most Loved</p>
-                <h2 class="section-heading">Featured Dishes</h2>
+                <p class="section-label">Fresh Today</p>
+                <h2 class="section-heading">What's Cooking Today</h2>
             </div>
-            <div class="dishes-grid">
-                <div class="dish-card reveal visible delay-1">
-                    <div class="dish-img-wrap">
-                        <img src="images/Suya.jpg" alt="Suya" loading="lazy">
-                        <!-- Order button and overlay removed -->
-                    </div>
-                    <div class="dish-info">
-                        <div class="dish-top">
-                            <h3>Suya</h3>
-                            <span class="dish-price">$16</span>
-                        </div>
-                        <p>Spicy grilled meat skewers in authentic West African groundnut spice mix</p>
-                        <span class="dish-tag">Grilled</span>
-                    </div>
-                </div>
-                <div class="dish-card reveal visible">
-                    <div class="dish-img-wrap">
-                        <img src="images/Ndole.jpg" alt="Ndole" loading="lazy">
-                        <!-- Order button and overlay removed -->
-                    </div>
-                    <div class="dish-info">
-                        <div class="dish-top">
-                            <h3>Ndole</h3>
-                            <span class="dish-price">$18</span>
-                        </div>
-                        <p>Traditional bitter leaf stew with groundnuts and your choice of meat or fish</p>
-                        <span class="dish-tag">Main Dish</span>
-                    </div>
-                </div>
-                <div class="dish-card reveal visible delay-2">
-                    <div class="dish-img-wrap">
-                        <img src="images/Eru.jpg" alt="Eru" loading="lazy">
-                        <!-- Order button and overlay removed -->
-                    </div>
-                    <div class="dish-info">
-                        <div class="dish-top">
-                            <h3>Eru</h3>
-                            <span class="dish-price">$16</span>
-                        </div>
-                        <p>Hearty vegetable soup with eru leaves, smoked fish, and crayfish</p>
-                        <span class="dish-tag">Main Dish</span>
-                    </div>
-                </div>
-                <div class="dish-card reveal visible delay-3">
-                    <div class="dish-img-wrap">
-                        <img src="images/Fried Rice.jpg" alt="Jollof Rice" loading="lazy">
-                        <div class="dish-overlay">
-                            <a href="order.html?dish=Jollof+Rice" class="dish-order-btn">Order This</a>
-                        </div>
-                    </div>
-                    <div class="dish-info">
-                        <div class="dish-top">
-                            <h3>Jollof Rice</h3>
-                            <span class="dish-price">$14</span>
-                        </div>
-                        <p>One-pot rice cooked in rich tomato sauce with onions, peppers, and spices</p>
-                        <span class="dish-tag">Rice & Grains</span>
-                    </div>
+            <div class="dishes-grid" id="todayMenuGrid">
+                <div class="menu-loading" style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:40px;">
+                    Loading today's menu...
                 </div>
             </div>
             <div class="text-center" style="margin-top:50px;">
