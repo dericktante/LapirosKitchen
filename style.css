@@ -26,7 +26,7 @@
     --charcoal:     #1a1a1a;
     --text-body:    #3a3a3a;
     --text-muted:   #777;
-    --border:       rgba(0,0,0,0.08);
+    --border:       rgba(35, 15, 15, 0.08);
     --radius:       14px;
     --radius-sm:    8px;
     --shadow-sm:    0 2px 12px rgba(0,0,0,0.06);
@@ -159,7 +159,7 @@ ul { list-style: none; }
 }
 
 .callout-centered {
-    text-align: center;
+    text-align: center !important;
 }
 
 .callout-text-center {
@@ -231,7 +231,7 @@ ul { list-style: none; }
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--green-accent);
+    color: var(--gold);
     margin-bottom: 12px;
 }
 
@@ -1742,8 +1742,8 @@ ul { list-style: none; }
 
 .contact-info {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
     margin-bottom: 50px;
 }
 
@@ -1751,7 +1751,7 @@ ul { list-style: none; }
     background: #fff;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 28px;
+    padding: 20px;
     box-shadow: var(--shadow-sm);
     text-align: center;
     transition: box-shadow 0.22s, border-color 0.22s, transform 0.22s;
