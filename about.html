@@ -3,13 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn more about Lapiros Kitchen and our mission to bring authentic Cameroonian flavors to Oklahoma City.">
+    <meta name="theme-color" content="#1e3a0f">
+    <link rel="canonical" href="/about.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Lapiros Kitchen">
+    <meta property="og:title" content="About Us – Lapiros Kitchen">
+    <meta property="og:description" content="Learn more about Lapiros Kitchen and our mission to bring authentic Cameroonian flavors to Oklahoma City.">
+    <meta property="og:url" content="/about.html">
+    <meta property="og:image" content="/icon-512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About Us – Lapiros Kitchen">
+    <meta name="twitter:description" content="Learn more about Lapiros Kitchen and our mission to bring authentic Cameroonian flavors to Oklahoma City.">
+    <meta name="twitter:image" content="/icon-512.png">
     <title>About Us – Lapiros Kitchen</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <nav class="navbar" id="navBar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
@@ -23,19 +40,19 @@
                 <li class="nav-mobile-only"><a href="shipping.html">Shipping Policy</a></li>
                 <li class="nav-mobile-only"><a href="refunds.html">Refund Policy</a></li>
             </ul>
-            <button class="nav-toggle-btn" id="navToggleBtn" aria-label="Toggle menu">
+            <button class="nav-toggle-btn" id="navToggleBtn" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenuList">
                 <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
 
-    <section class="about-simple">
+    <section class="about-simple" id="main-content" tabindex="-1">
         <div class="hero-logo">
             <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen Logo">
         </div>
         <h1>Coming Soon</h1>
-        <p style="color:var(--text-muted);max-width:400px;">We're working on sharing our full story with you. In the meantime, come taste it for yourself!</p>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
+        <p class="text-muted max-w-400">We're working on sharing our full story with you. In the meantime, come taste it for yourself!</p>
+        <div class="flex-center-wrap">
             <a href="index.html" class="btn btn-green">Back to Home</a>
             <!-- Order Now button removed -->
         </div>
@@ -47,11 +64,6 @@
                 <div class="footer-brand">
                     <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="footer-logo">
                     <p>Authentic Afro-Caribbean cuisine made with love in Oklahoma City.</p>
-                    <div class="social-links">
-                        <a href="tel:4052273385" class="social-link">📞</a>
-                        <a href="sms:4052273385" class="social-link">💬</a>
-                        <a href="/cdn-cgi/l/email-protection#3d5f5c4f54565c5154517d445c555252135e5250" class="social-link">📧</a>
-                    </div>
                 </div>
                 <div class="footer-col">
                     <h4>Quick Links</h4>
@@ -66,8 +78,25 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <p><a href="tel:4052273385">(405) 227-3385</a></p>
-                    <p><a href="/cdn-cgi/l/email-protection#aecccfdcc7c5cfc2c7c2eed7cfc6c1c180cdc1c3"><span class="__cf_email__" data-cfemail="771516051e1c161b1e1b370e161f18185914181a">[email&#160;protected]</span></a></p>
+                    <p><a href="mailto:barikalil@gmail.com">barikalil@gmail.com</a></p>
                     <p>12405 Coywood<br>Oklahoma City, OK 73142</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Social Media</h4>
+                    <div class="footer-social-list">
+                        <a href="https://www.snapchat.com" target="_blank" rel="noopener noreferrer" class="social-platform-link social-snapchat" aria-label="Snapchat" title="Snapchat">
+                            <svg class="social-platform-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8c-3.3 0-5.4 2.2-5.4 5.4 0 1 .2 2 .7 2.8-.2.6-.7 1.1-1.5 1.4-.4.2-.5.6-.4.9.1.3.4.5.7.5.6 0 1.2-.2 1.8-.5.5.4 1.1.7 1.8.9l-.2.9c-.1.3 0 .6.2.8.2.2.5.2.8.1l1.5-.7 1.5.7c.3.1.6.1.8-.1.2-.2.3-.5.2-.8l-.2-.9c.7-.2 1.3-.5 1.8-.9.6.3 1.2.5 1.8.5.3 0 .6-.2.7-.5.1-.3 0-.7-.4-.9-.8-.3-1.3-.8-1.5-1.4.5-.8.7-1.8.7-2.8 0-3.2-2.1-5.4-5.4-5.4zm-2.2 5.5c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7zm4.4 0c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7z" fill="currentColor"/></svg>
+                            <span class="sr-only">Snapchat</span>
+                        </a>
+                        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="social-platform-link social-facebook" aria-label="Facebook" title="Facebook">
+                            <svg class="social-platform-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.3 21v-7h2.4l.4-2.8h-2.8V9.9c0-.8.2-1.4 1.4-1.4h1.5V6c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.9v2.2H8v2.8h2.3v7h3z" fill="currentColor"/></svg>
+                            <span class="sr-only">Facebook</span>
+                        </a>
+                        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="social-platform-link social-instagram" aria-label="Instagram" title="Instagram">
+                            <svg class="social-platform-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+                            <span class="sr-only">Instagram</span>
+                        </a>
+                    </div>
                 </div>
                 <div class="footer-col">
                     <h4>Payments</h4>
@@ -79,7 +108,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 Lapiros Kitchen. All rights reserved.</p>
+                <p>© 2026 Lapiros Kitchen. All rights reserved.</p>
             </div>
         </div>
     </footer>
