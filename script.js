@@ -111,6 +111,22 @@ if (contactForm) {
         const { name, phone, email, message } = Object.fromEntries(
             ['name','phone','email','message'].map(id => [id, document.getElementById(id).value.trim()])
         );
+
+        if (!name || !message) {
+            showToast('Please enter your name and message.', 'warning');
+            return;
+        }
+
+        if (!phone && !email) {
+            showToast('Please provide either a phone number or an email.', 'warning');
+            return;
+        }
+
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showToast('Please enter a valid email address.', 'warning');
+            return;
+        }
+
         try {
             const res = await fetch(`${API}/contact`, {
                 method: 'POST',
@@ -139,6 +155,17 @@ if (reviewForm) {
         const email   = document.getElementById('reviewEmail').value.trim();
         const rating  = document.getElementById('rating').value;
         const review  = document.getElementById('reviewMessage').value.trim();
+
+        if (!name || !rating || !review) {
+            showToast('Please complete name, rating, and review message.', 'warning');
+            return;
+        }
+
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showToast('Please enter a valid email address.', 'warning');
+            return;
+        }
+
         try {
             const res = await fetch(`${API}/review`, {
                 method: 'POST',
@@ -211,6 +238,7 @@ if (menuSearch) {
    CART
    ============================================ */
 let cart = {};
+const CART_STORAGE_KEY = 'cart';
 
 const cartBtn       = document.getElementById('cartBtn');
 const cartSidebar   = document.getElementById('cartSidebar');
@@ -229,6 +257,15 @@ const wishlistItemsEl = document.getElementById('wishlistItems');
 const wishlistCountEl = document.getElementById('wishlistCount');
 const custPickupInput = document.getElementById('custPickup');
 let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+
+try {
+    const savedCart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || '{}');
+    if (savedCart && typeof savedCart === 'object') {
+        cart = savedCart;
+    }
+} catch {
+    cart = {};
+}
 
 // Pickup datetime input
 if (custPickupInput) {
@@ -323,7 +360,11 @@ function updateCart() {
     cartItemsEl.querySelectorAll('.cart-line-remove').forEach(btn => {
         btn.addEventListener('click', () => { delete cart[btn.dataset.name]; updateCart(); });
     });
+
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
 }
+
+updateCart();
 
 /* ============================================
    WISHLIST
@@ -461,7 +502,7 @@ if (todayMenuGrid) {
                     <h4 class="item-name">${dish.name}</h4>
                     <div class="item-price">$${dish.price}</div>
                     ${dish.sold_out
-                        ? `<a href="menu.html" class="btn btn-outline-dark today-menu-cta" style="margin-top:8px;font-size:0.85rem;">See Full Menu</a>`
+                        ? `<a href="menu.html#full" class="btn btn-outline-dark today-menu-cta" style="margin-top:8px;font-size:0.85rem;">See Full Menu</a>`
                         : `<a href="menu.html" class="btn btn-green today-menu-cta" style="margin-top:8px;font-size:0.85rem;">Order Now</a>`}
                 </div>
             `).join('');
@@ -474,11 +515,37 @@ if (todayMenuGrid) {
 /* ============================================
    MENU PAGE — tabs
    ============================================ */
-function switchMenuTab(tab) {
-    document.getElementById('tabToday').classList.toggle('active', tab === 'today');
-    document.getElementById('tabFull').classList.toggle('active', tab === 'full');
-    document.getElementById('todayTabContent').style.display = tab === 'today' ? '' : 'none';
-    document.getElementById('fullTabContent').style.display  = tab === 'full'  ? '' : 'none';
+function switchMenuTab(tab, updateHash = true) {
+    const tabTodayEl = document.getElementById('tabToday');
+    const tabFullEl = document.getElementById('tabFull');
+    const todayContentEl = document.getElementById('todayTabContent');
+    const fullContentEl = document.getElementById('fullTabContent');
+    if (!tabTodayEl || !tabFullEl || !todayContentEl || !fullContentEl) return;
+
+    const safeTab = tab === 'full' ? 'full' : 'today';
+    tabTodayEl.classList.toggle('active', safeTab === 'today');
+    tabFullEl.classList.toggle('active', safeTab === 'full');
+    todayContentEl.classList.toggle('hidden-initial', safeTab !== 'today');
+    fullContentEl.classList.toggle('hidden-initial', safeTab !== 'full');
+    todayContentEl.style.display = safeTab === 'today' ? '' : 'none';
+    fullContentEl.style.display  = safeTab === 'full'  ? '' : 'none';
+
+    if (updateHash) {
+        const newHash = safeTab === 'full' ? '#full' : '#today';
+        if (window.location.hash !== newHash) {
+            history.replaceState(null, '', `${window.location.pathname}${window.location.search}${newHash}`);
+        }
+    }
+}
+
+const tabTodayBtn = document.getElementById('tabToday');
+const tabFullBtn = document.getElementById('tabFull');
+if (tabTodayBtn && tabFullBtn) {
+    switchMenuTab(window.location.hash === '#today' ? 'today' : 'full', false);
+
+    window.addEventListener('hashchange', () => {
+        switchMenuTab(window.location.hash === '#today' ? 'today' : 'full', false);
+    });
 }
 
 const todayItemsEl = document.getElementById('todayItems');
@@ -488,7 +555,7 @@ if (todayItemsEl) {
         .then(({ dishes = [] }) => {
             if (!dishes.length) {
                 todayItemsEl.innerHTML = `
-                    <div style="text-align:center;padding:60px 20px;color:var(--text-muted);width:100%;">
+                    <div class="menu-empty-state" style="padding:60px 20px;color:var(--text-muted);">
                         <div style="font-size:3rem;margin-bottom:16px;">🌅</div>
                         <p style="font-size:1rem;">Nothing on today's menu yet.</p>
                         <p style="font-size:0.88rem;margin-top:8px;">Check the Full Menu tab to browse everything we offer.</p>
@@ -521,7 +588,7 @@ if (todayItemsEl) {
             initWishlist();
         })
         .catch(() => {
-            todayItemsEl.innerHTML = `<p style="text-align:center;color:var(--text-muted);">Could not load today's menu.</p>`;
+            todayItemsEl.innerHTML = `<p class="menu-empty-state" style="color:var(--text-muted);padding:40px 20px;">Could not load today's menu.</p>`;
         });
 }
 
