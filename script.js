@@ -1,6 +1,20 @@
 const API = 'https://lapiros-backend.onrender.com';
 const HEART = '\u2665\uFE0E';
 
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function safeNumber(value) {
+    const num = Number(value);
+    return Number.isFinite(num) ? num : 0;
+}
+
 /* ============================================
    SITE STATUS — announcement & closed banner
    ============================================ */
@@ -13,7 +27,14 @@ async function checkSiteStatus() {
         if (settings.announcement) {
             const banner = document.createElement('div');
             banner.style.cssText = `background:#1a2e0f;color:white;text-align:center;padding:10px 20px;font-size:0.88rem;font-weight:500;position:relative;z-index:999;`;
-            banner.innerHTML = `📢 ${settings.announcement} <button onclick="this.parentElement.remove()" style="background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;margin-left:12px;font-size:1rem;">✕</button>`;
+            const text = document.createElement('span');
+            text.textContent = `📢 ${settings.announcement}`;
+            const dismissBtn = document.createElement('button');
+            dismissBtn.type = 'button';
+            dismissBtn.textContent = '✕';
+            dismissBtn.style.cssText = 'background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;margin-left:12px;font-size:1rem;';
+            dismissBtn.addEventListener('click', () => banner.remove());
+            banner.append(text, dismissBtn);
             document.body.insertBefore(banner, document.body.firstChild);
         }
 
@@ -81,7 +102,11 @@ function showToast(msg, type = 'success') {
     document.querySelector('.toast')?.remove();
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
-    toast.innerHTML = `<span>${type === 'success' ? '✅' : '⚠️'}</span><span>${msg}</span>`;
+    const icon = document.createElement('span');
+    icon.textContent = type === 'success' ? '✅' : '⚠️';
+    const text = document.createElement('span');
+    text.textContent = msg;
+    toast.append(icon, text);
     Object.assign(toast.style, {
         position: 'fixed', bottom: '28px', right: '24px',
         background: type === 'success' ? '#2d5016' : '#b8860b',
@@ -196,13 +221,13 @@ if (menuItemsEl) {
                 return;
             }
             menuItemsEl.innerHTML = dishes.map(dish => `
-                <div class="menu-item" data-name="${dish.name}" data-price="${dish.price}">
+                <div class="menu-item" data-name="${escapeHtml(dish.name)}" data-price="${safeNumber(dish.price)}">
                     <button class="wishlist-btn" type="button" aria-label="Add to Wishlist">${HEART}</button>
                     ${dish.image_url
-                        ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${dish.name}" loading="lazy"></div>`
+                        ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${escapeHtml(dish.name)}" loading="lazy"></div>`
                         : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
-                    <h4 class="item-name">${dish.name}</h4>
-                    <div class="item-price">$${dish.price}</div>
+                    <h4 class="item-name">${escapeHtml(dish.name)}</h4>
+                    <div class="item-price">$${safeNumber(dish.price)}</div>
                     <div class="item-controls">
                         <div class="qty-control">
                             <button class="qty-btn minus" type="button">−</button>
@@ -350,10 +375,10 @@ function updateCart() {
         ? `<div class="cart-empty"><p>🛒 Your cart is empty</p><p>Add some dishes to get started!</p></div>`
         : keys.map(name => `
             <div class="cart-line">
-                <span class="cart-line-name">${name}</span>
+                <span class="cart-line-name">${escapeHtml(name)}</span>
                 <span class="cart-line-qty">×${cart[name].qty}</span>
                 <span class="cart-line-price">$${(cart[name].price * cart[name].qty).toFixed(2)}</span>
-                <button class="cart-line-remove" type="button" data-name="${name}">✕</button>
+                <button class="cart-line-remove" type="button" data-name="${escapeHtml(name)}">✕</button>
             </div>
         `).join('');
 
@@ -402,14 +427,14 @@ function renderWishlist() {
         const card  = document.querySelector(`.menu-item[data-name="${CSS.escape(name)}"]`);
         const price = card ? parseFloat(card.dataset.price) : null;
         return `
-            <div class="wishlist-line" data-name="${name}">
+            <div class="wishlist-line" data-name="${escapeHtml(name)}">
                 <div class="wishlist-line-meta">
-                    <span class="wishlist-line-name">${name}</span>
+                    <span class="wishlist-line-name">${escapeHtml(name)}</span>
                     <span class="wishlist-line-price">${price !== null ? `$${price.toFixed(2)}` : 'See menu'}</span>
                 </div>
                 <div class="wishlist-line-actions">
-                    <button class="wishlist-line-add" data-name="${name}">Add to Cart</button>
-                    <button class="wishlist-line-remove" data-name="${name}">✕</button>
+                    <button class="wishlist-line-add" data-name="${escapeHtml(name)}">Add to Cart</button>
+                    <button class="wishlist-line-remove" data-name="${escapeHtml(name)}">✕</button>
                 </div>
             </div>`;
     }).join('');
@@ -492,15 +517,15 @@ if (todayMenuGrid) {
                 return;
             }
             todayMenuGrid.innerHTML = dishes.map(dish => `
-                <div class="menu-item ${dish.sold_out ? 'menu-item-sold-out' : ''}" data-name="${dish.name}" data-price="${dish.price}">
+                <div class="menu-item ${dish.sold_out ? 'menu-item-sold-out' : ''}" data-name="${escapeHtml(dish.name)}" data-price="${safeNumber(dish.price)}">
                     <div style="position:relative; width:100%;">
                         ${dish.image_url
-                            ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${dish.name}" loading="lazy"></div>`
+                            ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${escapeHtml(dish.name)}" loading="lazy"></div>`
                             : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
                         ${dish.sold_out ? `<div style="position:absolute;top:8px;left:8px;background:rgba(229,62,62,0.9);color:white;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;">Sold Out</div>` : ''}
                     </div>
-                    <h4 class="item-name">${dish.name}</h4>
-                    <div class="item-price">$${dish.price}</div>
+                    <h4 class="item-name">${escapeHtml(dish.name)}</h4>
+                    <div class="item-price">$${safeNumber(dish.price)}</div>
                     ${dish.sold_out
                         ? `<a href="menu.html#full" class="btn btn-outline-dark today-menu-cta" style="margin-top:8px;font-size:0.85rem;">See Full Menu</a>`
                         : `<a href="menu.html#today" class="btn btn-green today-menu-cta" style="margin-top:8px;font-size:0.85rem;">Order Now</a>`}
@@ -563,16 +588,16 @@ if (todayItemsEl) {
                 return;
             }
             todayItemsEl.innerHTML = dishes.map(dish => `
-                <div class="menu-item ${dish.sold_out ? 'menu-item-sold-out' : ''}" data-name="${dish.name}" data-price="${dish.price}">
+                <div class="menu-item ${dish.sold_out ? 'menu-item-sold-out' : ''}" data-name="${escapeHtml(dish.name)}" data-price="${safeNumber(dish.price)}">
                     ${dish.sold_out ? '' : `<button class="wishlist-btn" type="button" aria-label="Add to Wishlist">${HEART}</button>`}
                     <div style="position:relative; width:100%;">
                         ${dish.image_url
-                            ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${dish.name}" loading="lazy"></div>`
+                            ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${escapeHtml(dish.name)}" loading="lazy"></div>`
                             : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
                         ${dish.sold_out ? `<div style="position:absolute;top:8px;left:8px;background:rgba(229,62,62,0.9);color:white;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;">Sold Out</div>` : ''}
                     </div>
-                    <h4 class="item-name">${dish.name}</h4>
-                    <div class="item-price">$${dish.price}</div>
+                    <h4 class="item-name">${escapeHtml(dish.name)}</h4>
+                    <div class="item-price">$${safeNumber(dish.price)}</div>
                     ${dish.sold_out ? '' : `
                     <div class="item-controls">
                         <div class="qty-control">
@@ -601,9 +626,9 @@ if (reviewsGrid) {
             reviewsGrid.innerHTML = reviews.length
                 ? reviews.map(rev => `
                     <div class="review-card">
-                        <div class="review-stars">${rev.rating} out of 5 stars</div>
-                        <p class="review-text">"${rev.review}"</p>
-                        <div class="review-author">— ${rev.name}</div>
+                        <div class="review-stars">${safeNumber(rev.rating)} out of 5 stars</div>
+                        <p class="review-text">"${escapeHtml(rev.review)}"</p>
+                        <div class="review-author">— ${escapeHtml(rev.name)}</div>
                         <div class="review-date">${new Date(rev.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</div>
                     </div>`).join('')
                 : `<div class="reviews-empty">No reviews yet — be the first to leave one!</div>`;
