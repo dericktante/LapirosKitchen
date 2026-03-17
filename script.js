@@ -368,7 +368,7 @@ function updateCart() {
 
     if (cartCountEl)    cartCountEl.textContent    = totalQty;
     if (cartEmpty)      cartEmpty.style.display     = keys.length ? 'none' : '';
-    if (cartFooter)     cartFooter.style.display    = keys.length ? '' : 'none';
+    if (cartFooter)     cartFooter.classList.toggle('hidden-initial', !keys.length);
     if (cartSubtotalEl) cartSubtotalEl.textContent  = `$${total.toFixed(2)}`;
 
     cartItemsEl.innerHTML = keys.length === 0
