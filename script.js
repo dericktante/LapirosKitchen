@@ -503,7 +503,7 @@ if (todayMenuGrid) {
                     <div class="item-price">$${dish.price}</div>
                     ${dish.sold_out
                         ? `<a href="menu.html#full" class="btn btn-outline-dark today-menu-cta" style="margin-top:8px;font-size:0.85rem;">See Full Menu</a>`
-                        : `<a href="menu.html" class="btn btn-green today-menu-cta" style="margin-top:8px;font-size:0.85rem;">Order Now</a>`}
+                        : `<a href="menu.html#today" class="btn btn-green today-menu-cta" style="margin-top:8px;font-size:0.85rem;">Order Now</a>`}
                 </div>
             `).join('');
         })
@@ -565,7 +565,7 @@ if (todayItemsEl) {
             todayItemsEl.innerHTML = dishes.map(dish => `
                 <div class="menu-item ${dish.sold_out ? 'menu-item-sold-out' : ''}" data-name="${dish.name}" data-price="${dish.price}">
                     ${dish.sold_out ? '' : `<button class="wishlist-btn" type="button" aria-label="Add to Wishlist">${HEART}</button>`}
-                    <div style="position:relative;">
+                    <div style="position:relative; width:100%;">
                         ${dish.image_url
                             ? `<div class="menu-item-image"><img src="${dish.image_url.startsWith('http') ? dish.image_url : 'https://lapiros-kitchen.vercel.app/' + dish.image_url}" alt="${dish.name}" loading="lazy"></div>`
                             : `<div class="menu-item-image menu-item-no-image">🍽️</div>`}
