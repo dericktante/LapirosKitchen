@@ -4,7 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse Lapiros Kitchen's full menu and today's available dishes, with easy add-to-cart ordering and pickup details.">
+    <meta name="theme-color" content="#1e3a0f">
+    <link rel="canonical" href="/menu.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Lapiros Kitchen">
+    <meta property="og:title" content="Menu – Lapiros Kitchen">
+    <meta property="og:description" content="Browse Lapiros Kitchen's full menu and today's available dishes, with easy add-to-cart ordering and pickup details.">
+    <meta property="og:url" content="/menu.html">
+    <meta property="og:image" content="/icon-512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Menu – Lapiros Kitchen">
+    <meta name="twitter:description" content="Browse Lapiros Kitchen's full menu and today's available dishes, with easy add-to-cart ordering and pickup details.">
+    <meta name="twitter:image" content="/icon-512.png">
     <title>Menu – Lapiros Kitchen</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -13,13 +29,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="menu-page">
+
+    <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <nav class="navbar" id="navBar">
         <div class="nav-container">
-            <button class="nav-toggle-btn" id="navToggleBtn" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenuList">
-                <span></span><span></span><span></span>
-            </button>
             <a href="index.html" class="nav-logo">
                 <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="logo-img">
             </a>
@@ -39,6 +54,9 @@
                 🛒
                 <span class="cart-count" id="cartCount">0</span>
             </button>
+            <button class="nav-toggle-btn" id="navToggleBtn" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenuList">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
@@ -55,7 +73,7 @@
                 <p>Add some dishes to get started!</p>
             </div>
         </div>
-        <div class="cart-footer" id="cartFooter" style="display:none;">
+        <div class="cart-footer hidden-initial" id="cartFooter">
             <div class="cart-subtotal">
                 <span>Subtotal</span>
                 <span id="cartSubtotal">$0.00</span>
@@ -68,7 +86,7 @@
                 <input type="text" id="custPickup" placeholder="Preferred pickup date/time" aria-label="Preferred pickup date and time" autocomplete="off" inputmode="none">
                 <textarea id="custMessage" placeholder="Special requests? (optional)" aria-label="Special requests" rows="2"></textarea>
             </div>
-            <button class="btn btn-green" id="placeOrderBtn" style="width:100%;">Place Order</button>
+            <button class="btn btn-green full-width-btn" id="placeOrderBtn">Place Order</button>
         </div>
     </div>
 
@@ -85,9 +103,9 @@
         </div>
     </div>
 
-    <div class="page-hero">
+    <div class="page-hero" id="main-content" tabindex="-1">
         <div class="container">
-            <p class="section-label" style="color: var(--gold);">Authentic Flavors</p>
+            <p class="section-label section-label-gold">Authentic Flavors</p>
             <h1 class="page-title">Our Menu</h1>
             <p class="page-sub">Traditional Cameroonian dishes made fresh daily with authentic spices and ingredients.
             </p>
@@ -101,17 +119,17 @@
             </div>
             <!-- TABS -->
             <div class="menu-tabs" id="menuTabs">
-                <button class="menu-tab active" id="tabToday" onclick="switchMenuTab('today')">🌅 Today</button>
-                <button class="menu-tab" id="tabFull" onclick="switchMenuTab('full')">🍽️ Full Menu</button>
+                <button class="menu-tab" id="tabToday" onclick="switchMenuTab('today')">🌅 Today's Menu</button>
+                <button class="menu-tab active" id="tabFull" onclick="switchMenuTab('full')">🍽️ Full Menu</button>
             </div>
             <!-- TODAY TAB -->
-            <div id="todayTabContent">
+            <div id="todayTabContent" class="hidden-initial">
                 <div class="menu-items" id="todayItems">
                     <div class="menu-loading">Loading today's menu...</div>
                 </div>
             </div>
             <!-- FULL MENU TAB -->
-            <div id="fullTabContent" style="display:none;">
+            <div id="fullTabContent">
                 <div class="menu-items" id="menuItems">
                     <div class="menu-loading">Loading dishes...</div>
                 </div>
@@ -125,12 +143,6 @@
                 <div class="footer-brand">
                     <img src="images/Lapiros Kitchen Logo.jpg" alt="Lapiros Kitchen" class="footer-logo">
                     <p>Authentic Afro-Caribbean cuisine made with love in Oklahoma City.</p>
-                    <div class="social-links">
-                        <a href="tel:4052273385" class="social-link">📞</a>
-                        <a href="sms:4052273385" class="social-link">💬</a>
-                        <a href="/cdn-cgi/l/email-protection#51333023383a303d383d112830393e3e7f323e3c"
-                            class="social-link">📧</a>
-                    </div>
                 </div>
                 <div class="footer-col">
                     <h4>Quick Links</h4>
@@ -145,11 +157,25 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <p><a href="tel:4052273385">(405) 227-3385</a></p>
-                    <p><a href="/cdn-cgi/l/email-protection#0d6f6c7f64666c6164614d746c656262236e6260"><span
-                                class="__cf_email__"
-                                data-cfemail="7e1c1f0c17151f1217123e071f161111501d1113">[email&#160;protected]</span></a>
-                    </p>
+                    <p><a href="mailto:barikalil@gmail.com">barikalil@gmail.com</a></p>
                     <p>12405 Coywood<br>Oklahoma City, OK 73142</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Social Media</h4>
+                    <div class="footer-social-list">
+                        <a href="https://www.snapchat.com" target="_blank" rel="noopener noreferrer" class="social-platform-link social-snapchat" aria-label="Snapchat" title="Snapchat">
+                            <svg class="social-platform-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8c-3.3 0-5.4 2.2-5.4 5.4 0 1 .2 2 .7 2.8-.2.6-.7 1.1-1.5 1.4-.4.2-.5.6-.4.9.1.3.4.5.7.5.6 0 1.2-.2 1.8-.5.5.4 1.1.7 1.8.9l-.2.9c-.1.3 0 .6.2.8.2.2.5.2.8.1l1.5-.7 1.5.7c.3.1.6.1.8-.1.2-.2.3-.5.2-.8l-.2-.9c.7-.2 1.3-.5 1.8-.9.6.3 1.2.5 1.8.5.3 0 .6-.2.7-.5.1-.3 0-.7-.4-.9-.8-.3-1.3-.8-1.5-1.4.5-.8.7-1.8.7-2.8 0-3.2-2.1-5.4-5.4-5.4zm-2.2 5.5c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7zm4.4 0c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7z" fill="currentColor"/></svg>
+                            <span class="sr-only">Snapchat</span>
+                        </a>
+                        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="social-platform-link social-facebook" aria-label="Facebook" title="Facebook">
+                            <svg class="social-platform-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.3 21v-7h2.4l.4-2.8h-2.8V9.9c0-.8.2-1.4 1.4-1.4h1.5V6c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.9v2.2H8v2.8h2.3v7h3z" fill="currentColor"/></svg>
+                            <span class="sr-only">Facebook</span>
+                        </a>
+                        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="social-platform-link social-instagram" aria-label="Instagram" title="Instagram">
+                            <svg class="social-platform-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+                            <span class="sr-only">Instagram</span>
+                        </a>
+                    </div>
                 </div>
                 <div class="footer-col">
                     <h4>Payments</h4>
@@ -161,7 +187,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 Lapiros Kitchen. All rights reserved.</p>
+                <p>© 2026 Lapiros Kitchen. All rights reserved.</p>
             </div>
         </div>
     </footer>
