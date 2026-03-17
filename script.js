@@ -601,7 +601,7 @@ if (reviewsGrid) {
             reviewsGrid.innerHTML = reviews.length
                 ? reviews.map(rev => `
                     <div class="review-card">
-                        <div class="review-stars">${'⭐'.repeat(rev.rating)}</div>
+                        <div class="review-stars">${rev.rating} out of 5 stars</div>
                         <p class="review-text">"${rev.review}"</p>
                         <div class="review-author">— ${rev.name}</div>
                         <div class="review-date">${new Date(rev.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</div>
