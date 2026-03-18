@@ -238,8 +238,8 @@ if (menuItemsEl) {
                     </div>
                 </div>
             `).join('');
-            initCart();
-            initWishlist();
+            initCart(menuItemsEl);
+            initWishlist(menuItemsEl);
         })
         .catch(() => {
             menuItemsEl.innerHTML = `<p style="text-align:center;color:var(--text-muted);">Could not load dishes right now.</p>`;
@@ -304,6 +304,9 @@ if (custPickupInput) {
     restorePlaceholder();
 }
 
+function lockScroll()   { document.body.style.overflow = 'hidden'; }
+function unlockScroll() { document.body.style.overflow = ''; }
+
 // Open/close cart
 if (cartBtn) {
     cartBtn.addEventListener('click', () => {
@@ -311,6 +314,7 @@ if (cartBtn) {
         wishlistSidebar?.classList.remove('active');
         cartSidebar?.classList.add('active');
         cartOverlay?.classList.add('active');
+        lockScroll();
     });
 }
 
@@ -320,6 +324,7 @@ if (wishlistBtn) {
         cartSidebar?.classList.remove('active');
         wishlistSidebar?.classList.add('active');
         cartOverlay?.classList.add('active');
+        lockScroll();
     });
 }
 
@@ -330,16 +335,22 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanels(
 
 function closeCart() {
     cartSidebar?.classList.remove('active');
-    if (!wishlistSidebar?.classList.contains('active')) cartOverlay?.classList.remove('active');
+    if (!wishlistSidebar?.classList.contains('active')) {
+        cartOverlay?.classList.remove('active');
+        unlockScroll();
+    }
 }
 function closeWishlist() {
     wishlistSidebar?.classList.remove('active');
-    if (!cartSidebar?.classList.contains('active')) cartOverlay?.classList.remove('active');
+    if (!cartSidebar?.classList.contains('active')) {
+        cartOverlay?.classList.remove('active');
+        unlockScroll();
+    }
 }
 function closePanels() { closeCart(); closeWishlist(); }
 
-function initCart() {
-    document.querySelectorAll('.menu-item').forEach(item => {
+function initCart(container) {
+    (container || document).querySelectorAll('.menu-item').forEach(item => {
         const name  = item.dataset.name;
         const price = parseFloat(item.dataset.price);
         const addBtn  = item.querySelector('.add-to-cart-btn');
@@ -354,7 +365,7 @@ function initCart() {
             const isFirst = Object.keys(cart).length === 0;
             cart[name] ? cart[name].qty += qty : (cart[name] = { price, qty });
             updateCart();
-            if (isFirst) { cartSidebar?.classList.add('active'); cartOverlay?.classList.add('active'); }
+            if (isFirst) { cartSidebar?.classList.add('active'); cartOverlay?.classList.add('active'); lockScroll(); }
             qty = 1; qtyVal.textContent = 1;
         });
     });
@@ -394,10 +405,10 @@ updateCart();
 /* ============================================
    WISHLIST
    ============================================ */
-function initWishlist() {
+function initWishlist(container) {
     wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
     renderWishlist();
-    document.querySelectorAll('.wishlist-btn').forEach(btn => {
+    (container || document).querySelectorAll('.wishlist-btn').forEach(btn => {
         const name = btn.closest('.menu-item').dataset.name;
         btn.classList.toggle('active', wishlist.includes(name));
         btn.addEventListener('click', () => {
@@ -527,7 +538,7 @@ if (todayMenuGrid) {
                     <h4 class="item-name">${escapeHtml(dish.name)}</h4>
                     <div class="item-price">$${safeNumber(dish.price)}</div>
                     ${dish.sold_out
-                        ? `<a href="menu.html#full" class="btn btn-outline-dark today-menu-cta" style="margin-top:8px;font-size:0.85rem;">See Full Menu</a>`
+                        ? ''
                         : `<a href="menu.html#today" class="btn btn-green today-menu-cta" style="margin-top:8px;font-size:0.85rem;">Order Now</a>`}
                 </div>
             `).join('');
@@ -567,6 +578,9 @@ const tabTodayBtn = document.getElementById('tabToday');
 const tabFullBtn = document.getElementById('tabFull');
 if (tabTodayBtn && tabFullBtn) {
     switchMenuTab(window.location.hash === '#today' ? 'today' : 'full', false);
+
+    tabTodayBtn.addEventListener('click', () => switchMenuTab('today'));
+    tabFullBtn.addEventListener('click', () => switchMenuTab('full'));
 
     window.addEventListener('hashchange', () => {
         switchMenuTab(window.location.hash === '#today' ? 'today' : 'full', false);
@@ -609,8 +623,8 @@ if (todayItemsEl) {
                     </div>`}
                 </div>
             `).join('');
-            initCart();
-            initWishlist();
+            initCart(todayItemsEl);
+            initWishlist(todayItemsEl);
         })
         .catch(() => {
             todayItemsEl.innerHTML = `<p class="menu-empty-state" style="color:var(--text-muted);padding:40px 20px;">Could not load today's menu.</p>`;
@@ -626,7 +640,7 @@ if (reviewsGrid) {
             reviewsGrid.innerHTML = reviews.length
                 ? reviews.map(rev => `
                     <div class="review-card">
-                        <div class="review-stars">${safeNumber(rev.rating)} out of 5 stars</div>
+                        <div class="review-stars" aria-label="${safeNumber(rev.rating)} out of 5 stars">${'★'.repeat(Math.min(5, safeNumber(rev.rating)))}${'☆'.repeat(5 - Math.min(5, safeNumber(rev.rating)))}</div>
                         <p class="review-text">"${escapeHtml(rev.review)}"</p>
                         <div class="review-author">— ${escapeHtml(rev.name)}</div>
                         <div class="review-date">${new Date(rev.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</div>
